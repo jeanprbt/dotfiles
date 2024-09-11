@@ -4,7 +4,7 @@ return {
 	config = function()
 		vim.api.nvim_set_hl(0, "GitBlame", { fg = "#a6e3a2", italic = true })
 		require("gitblame").setup({
-			enabled = true,
+			enabled = false,
 			message_template = " <summary> • <date> • <author> • <<sha>>",
 			date_format = "%m-%d-%Y %H:%M:%S",
 			virtual_text_column = 1,
