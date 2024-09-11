@@ -152,8 +152,7 @@ return {
 						end,
 						icon = { "", color = { fg = "green" } },
 						cond = function()
-							return (vim.bo.filetype == "markdown" or vim.bo.filetype == "quarto")
-								and require("molten.status").initialized()
+							return require("molten.status").initialized() == "Molten"
 						end,
 					},
 					"filetype",
