@@ -167,7 +167,7 @@ return {
 			local hydra = require("hydra")
 			hydra({
 				name = "Notebook",
-				hint = "_j_  | _k_  | _r_  | _R_  | _i_  | _o_  | _h_  | _c_  |  _n_  | _<esc>_/_q_ 󰩈",
+				hint = "_j_  | _k_  | _r_  | _R_  | _i_  | _s_  | _c_  | _o_  | _h_  | _n_  | _<esc>_/_q_ 󰩈",
 				config = {
 					color = "pink",
 					invoke_on_body = true,
@@ -195,6 +195,7 @@ return {
 					{ "r", ":QuartoSend<cr>" },
 					{ "R", ":QuartoSendAll<cr>" },
 					{ "i", ":MoltenInterrupt<cr>" },
+					{ "s", ":MoltenRestart!<cr>" },
 					{ "o", ":noautocmd MoltenEnterOutput<cr>" },
 					{ "h", ":MoltenHideOutput<cr>" },
 					{ "c", ":MoltenDelete<cr>" },
