@@ -129,6 +129,9 @@ export MPLBACKEND=module://matplotlib-backend-kitty
 # -- image.nvim --
 export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 
+# -- Jupyter kernels --
+export PYDEVD_DISABLE_FILE_VALIDATION=1
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

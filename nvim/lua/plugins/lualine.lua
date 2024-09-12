@@ -1,52 +1,3 @@
-local function lsp_clients()
-	local clients = vim.lsp.get_clients({ bufnr = 0 })
-	if #clients == 0 then
-		return ""
-	end
-	local client_names = {}
-	for _, client in pairs(clients) do
-		if client.name ~= "copilot" then
-			table.insert(client_names, client.name)
-		end
-	end
-	return table.concat(client_names, ", ")
-end
-
-local function linters()
-	local lint = require("lint")
-	local client_names = {}
-	local cur_ft = vim.bo.filetype
-	for ft, ft_linters in pairs(lint.linters_by_ft) do
-		if ft == cur_ft then
-			if type(ft_linters) == "table" then
-				for _, linter in pairs(ft_linters) do
-					table.insert(client_names, linter)
-				end
-			else
-				table.insert(client_names, ft_linters)
-			end
-		end
-	end
-	if #client_names == 0 then
-		return ""
-	end
-	return table.concat(client_names, ", ")
-end
-
-local function formatters()
-	local conform = require("conform")
-	local client_names = {}
-	for _, formatter in pairs(conform.list_formatters_for_buffer(0)) do
-		if formatter then
-			table.insert(client_names, formatter)
-		end
-	end
-	if #client_names == 0 then
-		return ""
-	end
-	return table.concat(client_names, ", ")
-end
-
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
@@ -135,16 +86,28 @@ return {
 						show_colors = true,
 					},
 					{
-						lsp_clients,
-						icon = { "", color = { fg = "beige" } },
-					},
-					{
-						linters,
-						icon = { "", color = { fg = "yellow" } },
-					},
-					{
-						formatters,
-						icon = { "󰛖", color = { fg = "pink" } },
+						function()
+							local path = require("venv-selector").venv()
+							local last_slash = path:match(".*()/")
+							local conda = false
+							if string.find(path, "conda") then
+								conda = true
+							end
+							if not last_slash then
+								return conda and "conda : " .. path or "venv : " .. path
+							else
+								return conda and "conda : " .. path:sub(last_slash + 1)
+									or "venv : " .. path:sub(last_slash + 1)
+							end
+						end,
+						icon = { "", color = { fg = "green" } },
+						cond = function()
+							return (os.getenv("VIRTUAL_ENV") ~= nil or os.getenv("CONDA_PREFIX") ~= nil)
+								and vim.bo.filetype == "python"
+						end,
+						on_click = function()
+							vim.cmd("VenvSelect")
+						end,
 					},
 					{
 						function()
@@ -152,7 +115,75 @@ return {
 						end,
 						icon = { "", color = { fg = "green" } },
 						cond = function()
-							return require("molten.status").initialized() == "Molten"
+							return require("molten.status").initialized() == "Molten" and vim.bo.filetype == "markdown"
+						end,
+						on_click = function()
+							vim.cmd("MoltenDeinit")
+							vim.cmd("MoltenInit")
+						end,
+					},
+					{
+						function()
+							local clients = vim.lsp.get_clients({ bufnr = 0 })
+							if #clients == 0 then
+								return ""
+							end
+							local client_names = {}
+							for _, client in pairs(clients) do
+								if client.name ~= "copilot" then
+									table.insert(client_names, client.name)
+								end
+							end
+							return table.concat(client_names, ", ")
+						end,
+						icon = { "", color = { fg = "beige" } },
+						cond = function()
+							return require("molten.status").initialized() == nil
+						end,
+					},
+					{
+						function()
+							local lint = require("lint")
+							local client_names = {}
+							local cur_ft = vim.bo.filetype
+							for ft, ft_linters in pairs(lint.linters_by_ft) do
+								if ft == cur_ft then
+									if type(ft_linters) == "table" then
+										for _, linter in pairs(ft_linters) do
+											table.insert(client_names, linter)
+										end
+									else
+										table.insert(client_names, ft_linters)
+									end
+								end
+							end
+							if #client_names == 0 then
+								return ""
+							end
+							return table.concat(client_names, ", ")
+						end,
+						icon = { "", color = { fg = "yellow" } },
+						cond = function()
+							return require("molten.status").initialized() == nil
+						end,
+					},
+					{
+						function()
+							local conform = require("conform")
+							local client_names = {}
+							for _, formatter in pairs(conform.list_formatters_for_buffer(0)) do
+								if formatter then
+									table.insert(client_names, formatter)
+								end
+							end
+							if #client_names == 0 then
+								return ""
+							end
+							return table.concat(client_names, ", ")
+						end,
+						icon = { "󰛖", color = { fg = "pink" } },
+						cond = function()
+							return require("molten.status").initialized() == nil
 						end,
 					},
 					"filetype",

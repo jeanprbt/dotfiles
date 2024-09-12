@@ -50,10 +50,11 @@
   "render-markdown.nvim": { "branch": "main", "commit": "8b6663b0605b134173c0dd44b7a4a41d3f1ad37f" },
   "searchbox.nvim": { "branch": "main", "commit": "5cbf11fbaa24da8810f467736cef7dde2410dfb2" },
   "telescope-media-files.nvim": { "branch": "master", "commit": "0826c7a730bc4d36068f7c85cf4c5b3fd9fb570a" },
-  "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
+  "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "toggle-overlength.nvim": { "branch": "main", "commit": "00a8b5c17b8dcbafd13fcef39c2120c923c069b7" },
   "toggleterm.nvim": { "branch": "main", "commit": "48be57eaba817f038d61bbf64d2c597f578c0827" },
   "trouble.nvim": { "branch": "main", "commit": "6efc446226679fda0547c0fd6a7892fd5f5b15d8" },
+  "venv-selector.nvim": { "branch": "regexp", "commit": "c9d638f76ec9e31a46839d6bc12677dbafd73389" },
   "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" },
   "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" }
 }

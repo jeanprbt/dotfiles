@@ -41,7 +41,7 @@ return {
 				},
 			},
 		})
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover information (lsp)" })
+		vim.keymap.set("n", "H", vim.lsp.buf.hover, { desc = "Show hover information (lsp)" })
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition (lsp)" })
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename occurences (lsp)" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions (lsp)" })
