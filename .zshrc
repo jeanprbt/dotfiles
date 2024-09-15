@@ -123,9 +123,6 @@ export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
 source /opt/homebrew/bin/virtualenvwrapper.sh
 
-# -- Matplotlib --
-export MPLBACKEND=module://matplotlib-backend-kitty
-
 # -- image.nvim --
 export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 

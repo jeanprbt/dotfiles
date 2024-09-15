@@ -3,20 +3,20 @@ vim.cmd(":set expandtab")
 vim.cmd(":set tabstop=4")
 vim.cmd(":set softtabstop=4")
 vim.cmd(":set shiftwidth=4")
+vim.cmd(":set noshowmode")
+vim.cmd(":set noshowcmd")
+vim.cmd(":set shortmess+=F")
 
 -- Numbers --
 vim.cmd(":set number")
 vim.cmd(":set relativenumber")
 
--- Command bar --
-vim.opt.cmdheight = 0
-vim.api.nvim_create_autocmd({ "RecordingEnter" }, {
-	callback = function()
-		vim.opt.cmdheight = 1
-	end,
-})
-vim.api.nvim_create_autocmd({ "RecordingLeave" }, {
-	callback = function()
-		vim.opt.cmdheight = 0
-	end,
+local function clear_command_line()
+	vim.defer_fn(function()
+		vim.cmd("echon ''")
+	end, 0)
+end
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	callback = clear_command_line,
 })
