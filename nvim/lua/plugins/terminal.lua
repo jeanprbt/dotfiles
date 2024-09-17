@@ -58,30 +58,10 @@ return {
 		)
 		function _G.set_terminal_keymaps()
 			vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode (toggleterm)" })
-			vim.keymap.set(
-				{ "n", "t" },
-				"<leader>h",
-				[[<Cmd>wincmd h<cr>]],
-				{ desc = "Move to left window (toggleterm)" }
-			)
-			vim.keymap.set(
-				{ "n", "t" },
-				"<leader>j",
-				[[<Cmd>wincmd j<cr>]],
-				{ desc = "Move to below window (toggleterm)" }
-			)
-			vim.keymap.set(
-				{ "n", "t" },
-				"<leader>k",
-				[[<Cmd>wincmd k<cr>]],
-				{ desc = "Move to above window (toggleterm)" }
-			)
-			vim.keymap.set(
-				{ "n", "t" },
-				"<leader>l",
-				[[<Cmd>wincmd l<cr>]],
-				{ desc = "Move to right window (toggleterm)" }
-			)
+			vim.keymap.set({ "n", "t" }, "<C-h>", [[<Cmd>wincmd h<cr>]], { desc = "Move to left window (toggleterm)" })
+			vim.keymap.set({ "n", "t" }, "<C-j>", [[<Cmd>wincmd j<cr>]], { desc = "Move to below window (toggleterm)" })
+			vim.keymap.set({ "n", "t" }, "<C-k>", [[<Cmd>wincmd k<cr>]], { desc = "Move to above window (toggleterm)" })
+			vim.keymap.set({ "n", "t" }, "<C-l>", [[<Cmd>wincmd l<cr>]], { desc = "Move to right window (toggleterm)" })
 		end
 
 		function _G.open_next_terminal()
