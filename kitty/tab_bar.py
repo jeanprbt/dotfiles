@@ -1,4 +1,5 @@
 import math
+import datetime
 from kitty.fast_data_types import Screen, get_options
 from kitty.tab_bar import (
     DrawData,
@@ -9,10 +10,10 @@ from kitty.tab_bar import (
 )
 
 opts = get_options()
-
 surface = as_rgb(int("cdd6f4", 16))
 window_icon = ""
 layout_icon = ""
+time_icon = ""
 
 active_tab_layout_name = ""
 active_tab_num_windows = 1
@@ -34,7 +35,7 @@ def draw_tab(
         active_tab_layout_name = tab.layout_name
         active_tab_num_windows = tab.num_windows
     end = draw_tab_with_separator(
-        draw_data, screen, tab, before, max_title_length, index, is_last, extra_data
+        draw_data, screen, tab, before, max_title_length, index, is_last, extra_data 
     )
     _draw_right_status(
         screen,
@@ -54,6 +55,9 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
         # num windows
         (surface, screen.cursor.bg, " " + window_icon + " "),
         (surface, screen.cursor.bg, str(active_tab_num_windows) + " "),
+        # time
+        (surface, screen.cursor.bg, " " + time_icon + " "),
+        (surface, screen.cursor.bg, datetime.datetime.now().strftime("%H:%M") + " "),
     ]
 
     # calculate leading spaces to separate tabs from right status
