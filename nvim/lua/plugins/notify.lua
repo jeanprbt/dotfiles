@@ -6,7 +6,7 @@ return {
 			background_colour = "#1e222a",
 			render = "wrapped-compact",
 			stages = "fade",
-			timeout = 4000,
+			timeout = 2000,
 		})
 		vim.notify = notify
 	end,
