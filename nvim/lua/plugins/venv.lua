@@ -27,7 +27,7 @@ return {
 						command = "fd /bin/python$ ~/.virtualenvs --full-path --color never",
 					},
 					anaconda_base = {
-						command = "fd python$ /opt/homebrew/Caskroom/miniconda/base/bin --full-path --color never",
+						command = "fd /python$ /opt/homebrew/Caskroom/miniconda/base/bin --full-path --color never",
 						type = "anaconda",
 					},
 					anaconda_envs = {

@@ -138,7 +138,7 @@ return {
 						end,
 						icon = { "", color = { fg = "beige" } },
 						cond = function()
-							return require("molten.status").initialized() == nil
+							return require("molten.status").initialized() ~= "Molten"
 						end,
 					},
 					{
@@ -164,7 +164,7 @@ return {
 						end,
 						icon = { "", color = { fg = "yellow" } },
 						cond = function()
-							return require("molten.status").initialized() == nil
+							return require("molten.status").initialized() ~= "Molten"
 						end,
 					},
 					{
@@ -183,7 +183,7 @@ return {
 						end,
 						icon = { "󰛖", color = { fg = "pink" } },
 						cond = function()
-							return require("molten.status").initialized() == nil
+							return require("molten.status").initialized() ~= "Molten"
 						end,
 					},
 					"filetype",
