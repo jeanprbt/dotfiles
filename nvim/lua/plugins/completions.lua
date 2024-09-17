@@ -1,20 +1,34 @@
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
-		"onsails/lspkind.nvim",
+		{
+			"L3MON4D3/LuaSnip",
+			dependencies = {
+				{
+					"rafamadriz/friendly-snippets",
+					config = function()
+						require("luasnip.loaders.from_vscode").lazy_load()
+					end,
+				},
+			},
+		},
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
-		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
-		"rafamadriz/friendly-snippets",
+		"onsails/lspkind.nvim",
 	},
-	config = function()
+	opts = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 		local copilot = require("copilot.suggestion")
-		require("luasnip.loaders.from_vscode").lazy_load()
-		cmp.setup({
+		cmp.event:on("menu_opened", function()
+			vim.b.copilot_suggestion_hidden = true
+		end)
+		cmp.event:on("menu_closed", function()
+			vim.b.copilot_suggestion_hidden = false
+		end)
+		return {
 			snippet = {
 				expand = function(args)
 					require("luasnip").lsp_expand(args.body)
@@ -54,19 +68,11 @@ return {
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "luasnip", group_index = 2 },
 				{ name = "path", group_index = 2 },
-			}, {
 				{ name = "buffer" },
 			}),
 			formatting = {
 				format = lspkind.cmp_format(),
 			},
-		})
-		cmp.event:on("menu_opened", function()
-			vim.b.copilot_suggestion_hidden = true
-		end)
-
-		cmp.event:on("menu_closed", function()
-			vim.b.copilot_suggestion_hidden = false
-		end)
+		}
 	end,
 }

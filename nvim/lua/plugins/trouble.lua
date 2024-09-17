@@ -1,11 +1,12 @@
 return {
 	"folke/trouble.nvim",
-	config = function()
-		require("trouble").setup({
-			focus = true,
-			warn_no_results = false,
-			auto_close = true,
-		})
+	opts = {
+		focus = true,
+		warn_no_results = true,
+		auto_close = true,
+	},
+	config = function(_, opts)
+		require("trouble").setup(opts)
 		vim.keymap.set(
 			"n",
 			"<leader>rf",

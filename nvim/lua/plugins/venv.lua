@@ -8,19 +8,17 @@ return {
 	},
 	lazy = false,
 	branch = "regexp",
-	config = function()
-		local venv = require("venv-selector")
-		local function shorter_name(filename)
-			return filename
-				:gsub(os.getenv("HOME") .. "/.", "")
-				:gsub("/bin/python", "")
-				:gsub("/opt/homebrew/Caskroom/", "")
-				:gsub("/base/envs", "")
-		end
-		venv.setup({
+	opts = function()
+		return {
 			settings = {
 				options = {
-					on_telescope_result_callback = shorter_name,
+					on_telescope_result_callback = function(filename)
+						return filename
+							:gsub(os.getenv("HOME") .. "/.", "")
+							:gsub("/bin/python", "")
+							:gsub("/opt/homebrew/Caskroom/", "")
+							:gsub("/base/envs", "")
+					end,
 				},
 				search = {
 					virtualenvs = {
@@ -36,8 +34,11 @@ return {
 					},
 				},
 			},
-		})
-
+		}
+	end,
+	config = function(_, opts)
+		local venv = require("venv-selector")
+		venv.setup(opts)
 		vim.keymap.set(
 			"n",
 			"<leader>vs",

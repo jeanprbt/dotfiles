@@ -1,19 +1,16 @@
-function NewFileWithPrompt()
-	vim.ui.input({ prompt = "New filename: " }, function(input)
-		if input and input ~= "" then
-			vim.cmd("edit " .. input)
-		end
-	end)
-end
-
-vim.cmd("command! DashboardNewFile :enew")
-vim.cmd("command! DashboardNewFile lua NewFileWithPrompt()")
-
 return {
 	"nvimdev/dashboard-nvim",
 	event = "VimEnter",
-	config = function()
-		require("dashboard").setup({
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	opts = function()
+		vim.api.nvim_create_user_command("DashboardNewFile", function()
+			vim.ui.input({ prompt = "New filename: " }, function(input)
+				if input and input ~= "" then
+					vim.cmd("edit " .. input)
+				end
+			end)
+		end, {})
+		return {
 			theme = "hyper",
 			config = {
 				week_header = {
@@ -68,7 +65,6 @@ return {
 					limit = 4,
 				},
 			},
-		})
+		}
 	end,
-	dependencies = { { "nvim-tree/nvim-web-devicons" } },
 }

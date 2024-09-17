@@ -2,8 +2,9 @@ return {
 	"zbirenbaum/copilot.lua",
 	cmd = "Copilot",
 	event = "InsertEnter",
-	config = function()
-		require("copilot").setup({
+	opts = function()
+		vim.keymap.set("n", "<leader>cp", "<cmd>Copilot toggle<cr>", { desc = "Toggle Copilot (copilot)" })
+		return {
 			panel = {
 				enabled = false,
 			},
@@ -16,7 +17,6 @@ return {
 					dismiss = "<C-e>",
 				},
 			},
-		})
-		vim.keymap.set("n", "<leader>cp", "<cmd>Copilot toggle<cr>", { desc = "Toggle Copilot (copilot)" })
+		}
 	end,
 }

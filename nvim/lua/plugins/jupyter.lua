@@ -5,28 +5,32 @@ return {
 			{
 				"3rd/image.nvim",
 				event = "VeryLazy",
-				config = function()
-					require("image").setup({
-						backend = "kitty",
-						integrations = {
-							markdown = {
-								enabled = true,
-								only_render_image_at_cursor = true,
-								filetypes = { "markdown", "quarto" },
-							},
+				opts = {
+					backend = "kitty",
+					integrations = {
+						markdown = {
+							enabled = true,
+							only_render_image_at_cursor = true,
+							filetypes = { "markdown", "quarto" },
 						},
-						max_width = 100,
-						max_height = 12,
-						max_height_window_percentage = math.huge,
-						max_width_window_percentage = math.huge,
-						window_overlap_clear_enabled = true,
-						window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-						window_background_opacity = 100,
-					})
-				end,
+					},
+					max_width = 100,
+					max_height = 12,
+					max_height_window_percentage = math.huge,
+					max_width_window_percentage = math.huge,
+					window_overlap_clear_enabled = true,
+					window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+					window_background_opacity = 100,
+				},
 			},
-
-			"GCBallesteros/jupytext.nvim",
+			{
+				"GCBallesteros/jupytext.nvim",
+				opts = {
+					style = "markdown",
+					output_extension = "md",
+					force_ft = "markdown",
+				},
+			},
 			"nvimtools/hydra.nvim",
 		},
 		build = ":UpdateRemotePlugins",
@@ -37,17 +41,12 @@ return {
 			vim.g.molten_wrap_output = true
 			vim.g.molten_virt_text_output = true
 			vim.g.molten_virt_lines_off_by_1 = true
-			require("jupytext").setup({
-				style = "markdown",
-				output_extension = "md",
-				force_ft = "markdown",
-			})
 
 			local imb = function()
 				vim.schedule(function()
 					local kernels = vim.fn.MoltenAvailableKernels()
 					local kernel_name = nil
-					if not ok or not vim.tbl_contains(kernels, kernel_name) then
+					if not vim.tbl_contains(kernels, kernel_name) then
 						kernel_name = nil
 						local venv = os.getenv("VIRTUAL_ENV")
 						local conda_env = os.getenv("CONDA_DEFAULT_ENV")
@@ -71,7 +70,7 @@ return {
 
 			vim.api.nvim_create_autocmd("BufEnter", {
 				pattern = { "*.ipynb" },
-				callback = function(e)
+				callback = function()
 					if vim.api.nvim_get_vvar("vim_did_enter") ~= 1 then
 						imb()
 					end
@@ -164,8 +163,7 @@ return {
 				keys("i")()
 			end
 
-			local hydra = require("hydra")
-			hydra({
+			require("hydra")({
 				name = "Notebook",
 				hint = "_j_  | _k_  | _r_  | _R_  | _a_  | _s_  | _c_  | _o_  | _h_  | _n_  | _<esc>_/_q_ 󰩈",
 				config = {
@@ -213,32 +211,29 @@ return {
 			"jmbuhr/otter.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		config = function()
-			local quarto = require("quarto")
-			quarto.setup({
-				lspFeatures = {
-					languages = { "python" },
-					chunks = "all",
-					diagnostics = {
-						enabled = true,
-						triggers = { "BufWritePost" },
-					},
-					completion = {
-						enabled = true,
-					},
-				},
-				keymap = {
-					hover = "K",
-					definition = "gd",
-					rename = "<leader>rn",
-					references = "<leader>rf",
-					format = "<leader>ft",
-				},
-				codeRunner = {
+		opts = {
+			lspFeatures = {
+				languages = { "python" },
+				chunks = "all",
+				diagnostics = {
 					enabled = true,
-					default_method = "molten",
+					triggers = { "BufWritePost" },
 				},
-			})
-		end,
+				completion = {
+					enabled = true,
+				},
+			},
+			keymap = {
+				hover = "H",
+				definition = "gd",
+				rename = "<leader>rn",
+				references = "<leader>rf",
+				format = "<leader>ft",
+			},
+			codeRunner = {
+				enabled = true,
+				default_method = "molten",
+			},
+		},
 	},
 }

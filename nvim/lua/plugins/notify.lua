@@ -1,13 +1,14 @@
 return {
 	"rcarriga/nvim-notify",
-	config = function()
+	opts = {
+		background_colour = "#1e222a",
+		render = "wrapped-compact",
+		stages = "fade",
+		timeout = 2000,
+	},
+	config = function(_, opts)
 		local notify = require("notify")
-		notify.setup({
-			background_colour = "#1e222a",
-			render = "wrapped-compact",
-			stages = "fade",
-			timeout = 2000,
-		})
+		notify.setup(opts)
 		vim.notify = notify
 	end,
 }

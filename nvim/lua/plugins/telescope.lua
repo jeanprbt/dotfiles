@@ -14,12 +14,9 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		config = function()
-			local builtin = require("telescope.builtin")
+		opts = function()
 			local actions = require("telescope.actions")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find file (telescope)" })
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep string (telescope)" })
-			require("telescope").setup({
+			return {
 				defaults = {
 					mappings = {
 						i = {
@@ -34,7 +31,13 @@ return {
 						filetypes = { "png", "webp", "jpg", "jpeg" },
 					},
 				},
-			})
+			}
+		end,
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			local builtin = require("telescope.builtin")
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find file (telescope)" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep string (telescope)" })
 		end,
 	},
 }

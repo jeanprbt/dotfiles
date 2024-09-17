@@ -4,15 +4,17 @@ return {
 	dependencies = {
 		"fouladi/toggle-overlength.nvim", -- ensure <leader>th shortcut is deleted --
 	},
-	config = function()
+	opts = {
+		open_mapping = "<C-t>",
+		float_opts = {
+			border = "curved",
+		},
+	},
+	config = function(_, opts)
 		local toggleterm = require("toggleterm")
-		toggleterm.setup({
-			open_mapping = "<C-t>",
-			float_opts = {
-				border = "curved",
-			},
-		})
 		local terms = require("toggleterm.terminal")
+		toggleterm.setup(opts)
+
 		local Terminal = terms.Terminal
 		function _G._lazygit_toggle()
 			Terminal:new({
@@ -22,7 +24,6 @@ return {
 				float_opts = { border = "curved" },
 			}):toggle()
 		end
-
 		function _G._python_toggle()
 			Terminal:new({
 				cmd = "python3",
@@ -30,7 +31,6 @@ return {
 				close_on_exit = true,
 			}):toggle()
 		end
-
 		vim.keymap.set("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Open lazygit (toggleterm)" })
 		vim.keymap.set(
 			{ "n", "t" },
@@ -63,7 +63,6 @@ return {
 			vim.keymap.set({ "n", "t" }, "<C-k>", [[<Cmd>wincmd k<cr>]], { desc = "Move to above window (toggleterm)" })
 			vim.keymap.set({ "n", "t" }, "<C-l>", [[<Cmd>wincmd l<cr>]], { desc = "Move to right window (toggleterm)" })
 		end
-
 		function _G.open_next_terminal()
 			local terminals = terms.get_all()
 			local direction = terminals[1].direction
@@ -72,14 +71,12 @@ return {
 				direction = direction,
 			}):toggle()
 		end
-
 		vim.api.nvim_set_keymap(
 			"t",
 			"<leader>tt",
 			"<cmd>lua open_next_terminal()<cr>",
 			{ noremap = true, silent = true }
 		)
-
 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 	end,
 }

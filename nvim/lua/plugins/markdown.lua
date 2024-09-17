@@ -5,7 +5,7 @@ return {
 		require("render-markdown").setup()
 		vim.keymap.set(
 			"n",
-			"<leader>rm",
+			"<leader>mr",
 			"<cmd>RenderMarkdown toggle<cr>",
 			{ desc = "Toggle Markdown rendering (render-markdown)" }
 		)

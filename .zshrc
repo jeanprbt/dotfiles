@@ -143,3 +143,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"

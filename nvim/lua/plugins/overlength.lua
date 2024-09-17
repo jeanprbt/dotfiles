@@ -1,7 +1,8 @@
 return {
 	"fouladi/toggle-overlength.nvim",
-	config = function()
-		require("toggle-overlength").setup({})
+	opts = {},
+	config = function(_, opts)
+		require("toggle-overlength").setup(opts)
 		vim.api.nvim_create_autocmd("bufReadPre", {
 			command = "ToggleHiOverLength",
 		})

@@ -1,16 +1,16 @@
 return {
 	"folke/which-key.nvim",
-	config = function()
+	opts = {
+		plugins = {
+			marks = false,
+		},
+		win = {
+			border = "rounded",
+		},
+	},
+	config = function(_, opts)
 		local wk = require("which-key")
-		vim.keymap.set("v", "<C-c>", '"+y', { desc = "Copy to clipboard (which-key)" })
-		wk.setup({
-			plugins = {
-				marks = false,
-			},
-			win = {
-				border = "rounded",
-			},
-		})
+		wk.setup(opts)
 		wk.add({
 			{
 				"<leader>?",

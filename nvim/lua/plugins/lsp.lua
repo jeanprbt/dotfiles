@@ -2,31 +2,25 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{
+				"williamboman/mason.nvim",
+				config = true,
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				opts = {
+					ensure_installed = {
+						"lua_ls",
+						"pyright",
+					},
+				},
+			},
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					settings = {
-						python = {
-							analysis = {
-								diagnosticSeverityOverrides = {
-									reportUnusedExpression = "none",
-								},
-							},
-						},
-					},
-				},
-			})
-
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 			local lspconfig = require("lspconfig")
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
@@ -50,9 +44,9 @@ return {
 	},
 	{
 		"smjonas/inc-rename.nvim",
-		config = function()
-			require("inc_rename").setup({})
+		opts = function()
 			vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Rename occurences (inc-rename)" })
+			return {}
 		end,
 	},
 }

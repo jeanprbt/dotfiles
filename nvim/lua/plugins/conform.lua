@@ -2,14 +2,20 @@ return {
 	"stevearc/conform.nvim",
 	dependencies = {
 		"williamboman/mason.nvim",
-		"zapling/mason-conform.nvim",
+		{
+			"zapling/mason-conform.nvim",
+			config = true,
+		},
 	},
 	event = {
 		"BufReadPre",
 		"BufNewFile",
 	},
-	config = function()
-		require("conform").setup({
+	opts = function()
+		vim.keymap.set("n", "<leader>ft", function()
+			require("conform").format({ bufnr = 0 })
+		end, { desc = "Format file (conform)" })
+		return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 			},
@@ -17,10 +23,6 @@ return {
 				timeout_ms = 500,
 				lsp_format = "fallback",
 			},
-		})
-		require("mason-conform").setup()
-		vim.keymap.set("n", "<leader>ft", function()
-			require("conform").format({ bufnr = 0 })
-		end, { desc = "Format file (conform)" })
+		}
 	end,
 }
