@@ -163,7 +163,8 @@ return {
 				keys("i")()
 			end
 
-			require("hydra")({
+			local Hydra = require("hydra")
+			local notebook = Hydra({
 				name = "Notebook",
 				hint = "_j_  | _k_  | _r_  | _R_  | _a_  | _s_  | _c_  | _o_  | _h_  | _n_  | _<esc>_/_q_ 󰩈",
 				config = {
@@ -202,6 +203,14 @@ return {
 					{ "q", nil, { exit = true } },
 				},
 			})
+
+			vim.keymap.set("n", "<leader>n", function()
+				if require("molten.status").initialized() == "Molten" then
+					notebook:activate()
+				else
+					vim.notify("Notebook mode is only available for *.ipynb files.")
+				end
+			end, { desc = "Trigger Notebook mode (hydra)" })
 		end,
 	},
 	{

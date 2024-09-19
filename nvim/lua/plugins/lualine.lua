@@ -3,6 +3,9 @@ return {
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"AndreM222/copilot-lualine",
+		"nvimtools/hydra.nvim",
+		"benlubas/molten-nvim",
+		"linux-cultist/venv-selector.nvim",
 	},
 	opts = {
 		options = {
@@ -25,8 +28,7 @@ return {
 							S = "S-LINE",
 							t = "TERMINAL",
 						}
-						local hydra = require("hydra.statusline")
-						if hydra.is_active() then
+						if require("hydra.statusline").is_active() then
 							return "NOTEBOOK"
 						else
 							return modes[vim.fn.mode()]
