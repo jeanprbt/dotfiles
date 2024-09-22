@@ -39,4 +39,9 @@ return {
 		event = "VeryLazy",
 		config = true,
 	},
+	{
+		"mrjones2014/smart-splits.nvim",
+		build = "./kitty/install-kittens.bash",
+		opts = {},
+	},
 }
