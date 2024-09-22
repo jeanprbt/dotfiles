@@ -12,15 +12,17 @@ return {
 					ensure_installed = {
 						"lua_ls",
 						"pyright",
+						"gopls",
 					},
 				},
 			},
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
+			local lspconfig = require("lspconfig")
+			local util = require("lspconfig.util")
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
@@ -33,6 +35,20 @@ return {
 							diagnosticSeverityOverrides = {
 								reportUnusedExpression = "none",
 							},
+						},
+					},
+				},
+			})
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+				filetypes = { "go", "gomod", "gomod", "gotmpl" },
+				cmd = { "gopls" },
+				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+				settings = {
+					gopls = {
+						completeUnimported = true,
+						analyses = {
+							unusedparams = true,
 						},
 					},
 				},
