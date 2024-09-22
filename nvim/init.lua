@@ -12,6 +12,12 @@ vim.opt.termguicolors = true
 vim.g.python3_host_prog = vim.fn.expand("$HOME") .. "/.virtualenvs/neovim/bin/python3"
 vim.g.python_host_prog = vim.fn.expand("$HOME") .. "/.virtualenvs/neovim/bin/python3"
 
+-- Set split navigation keymaps --
+vim.keymap.set({ "n", "t" }, "<C-h>", [[<Cmd>wincmd h<cr>]], { desc = "Move to left window" })
+vim.keymap.set({ "n", "t" }, "<C-j>", [[<Cmd>wincmd j<cr>]], { desc = "Move to below window" })
+vim.keymap.set({ "n", "t" }, "<C-k>", [[<Cmd>wincmd k<cr>]], { desc = "Move to above window" })
+vim.keymap.set({ "n", "t" }, "<C-l>", [[<Cmd>wincmd l<cr>]], { desc = "Move to right window" })
+
 -- Add luarocks package (image.nvim) --
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"

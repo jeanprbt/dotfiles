@@ -9,13 +9,13 @@ return {
 		require("trouble").setup(opts)
 		vim.keymap.set(
 			"n",
-			"<leader>rf",
+			"<leader>tr",
 			"<cmd>Trouble lsp_references toggle filter.buf=0<cr>",
 			{ desc = "Toggle references (trouble)" }
 		)
 		vim.keymap.set(
 			"n",
-			"<leader>d",
+			"<leader>td",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			{ desc = "Toggle diagnostics (trouble)" }
 		)
