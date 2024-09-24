@@ -1,16 +1,13 @@
-import math
+# pyright: reportMissingImports=false
 import datetime
+import math
+
 from kitty.fast_data_types import Screen, get_options
-from kitty.tab_bar import (
-    DrawData,
-    ExtraData,
-    TabBarData,
-    as_rgb,
-    draw_tab_with_separator,
-)
+from kitty.tab_bar import (DrawData, ExtraData, TabBarData, as_rgb,
+                           draw_tab_with_separator)
 
 opts = get_options()
-surface = as_rgb(int("d7827d", 16))
+surface = as_rgb(int("ea9a97", 16))
 window_icon = ""
 layout_icon = ""
 time_icon = ""

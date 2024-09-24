@@ -163,8 +163,8 @@ return {
 			end
 
 			local Hydra = require("hydra")
-			vim.cmd("highlight HydraPink guifg=#d7827d")
-			vim.cmd("highlight HydraBlue guifg=#276983")
+			vim.cmd("highlight HydraPink guifg=#ea9a97")
+			vim.cmd("highlight HydraBlue guifg=#9ccfd8")
 			local notebook = Hydra({
 				name = "Notebook",
 				hint = "_j_  | _k_  | _r_  | _R_  | _a_  | _s_  | _c_  | _o_  | _h_  | _n_  | _<esc>_/_q_ 󰩈",
@@ -215,7 +215,7 @@ return {
 		end,
 	},
 	{
-		"quartodev/quarto-nvim",
+		"quarto-dev/quarto-nvim",
 		ft = { "quarto", "markdown" },
 		dependencies = {
 			"jmbuhr/otter.nvim",

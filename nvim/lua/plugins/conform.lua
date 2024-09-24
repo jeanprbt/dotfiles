@@ -19,7 +19,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				go = { "gofumpt", "golines" },
-				python = { "black" },
+				python = { "isort" },
 			},
 			format_on_save = {
 				timeout_ms = 500,

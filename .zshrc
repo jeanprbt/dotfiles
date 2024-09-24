@@ -23,8 +23,6 @@ bindkey "^[[B" history-search-forward
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -- Completions --
-# Docker
-fpath=(~/.docker/completions \\$fpath) 
 
 # Git
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
@@ -82,7 +80,7 @@ export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 # -- Add support for files, ssh, env var. --
 _fzf_comprun() {
 	local command=$1
-    	shift
+    shift
 	case "$command" in
 		cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
 		export|unset) local var_name; var_name=$(awk -F'=' '{print $1}' <<< "$(echo {} | sed "s/^export //")"); fzf --preview "echo -n '$var_name: '; eval 'echo \${}'" "$@" ;;
@@ -129,6 +127,35 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 # -- Jupyter kernels --
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 
+# go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# -- Theme toggling --
+KITTY_FILE="$HOME/.config/kitty/kitty.conf"
+toggle-theme() {
+	current_theme=$(awk '$1=="include" {print $2}' "$HOME/.config/kitty/kitty.conf")
+	new_theme="rose-pine-moon.conf"
+	if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+		new_theme="rose-pine-dawn.conf"
+        alias nvim='nvim --cmd "set background=light"'
+        sed -i '' 's/393552/faf4ed/g' "$KITTY_FILE"
+    else 
+        alias nvim='nvim --cmd "set background=dark"'
+        sed -i '' 's/faf4ed/393552/g' "$KITTY_FILE"
+	fi
+	kitty @ set-colors --all --configured "~/.config/kitty/$new_theme"
+	sed -i '' -e "s/include.*/include $new_theme/" "$HOME/.config/kitty/kitty.conf"
+    kill -SIGUSR1 $KITTY_PID
+}
+current_theme=$(awk '$1=="include" {print $2}' "$HOME/.config/kitty/kitty.conf")
+if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+    alias nvim='nvim --cmd "set background=dark"'
+else 
+    alias nvim='nvim --cmd "set background=light"'
+fi
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -143,7 +170,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"

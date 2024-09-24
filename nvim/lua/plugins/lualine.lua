@@ -9,8 +9,8 @@ return {
 		"linux-cultist/venv-selector.nvim",
 	},
 	opts = function()
-		local pink = "#d7827d"
-		local blue = "#276983"
+		local pink = "#ea9a97"
+		local blue = "#9ccfd8"
 		return {
 			options = {
 				theme = "rose-pine",
@@ -85,6 +85,9 @@ return {
 								hl = {
 									enabled = pink,
 									sleep = pink,
+									disabled = pink,
+									warning = pink,
+									unknown = pink,
 								},
 							},
 						},

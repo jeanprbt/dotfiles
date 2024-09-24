@@ -46,9 +46,17 @@ return {
 	},
 	{
 		"fouladi/toggle-overlength.nvim",
-		opts = {
-			guibg = "#c8c3bd",
-		},
+		opts = function()
+			local color
+			if vim.o.background == "dark" then
+				color = "#56526e"
+			else
+				color = "#cecacd"
+			end
+			return {
+				guibg = color,
+			}
+		end,
 		config = function(_, opts)
 			require("toggle-overlength").setup(opts)
 			vim.api.nvim_create_autocmd("bufReadPre", {
