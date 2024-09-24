@@ -137,7 +137,7 @@ return {
 						end
 						return table.concat(client_names, ", ")
 					end,
-					icon = { "", color = { fg = "beige" } },
+					icon = { "󱉶", color = { fg = "beige" } },
 					cond = function()
 						return require("molten.status").initialized() ~= "Molten"
 					end,
@@ -163,7 +163,7 @@ return {
 						end
 						return table.concat(client_names, ", ")
 					end,
-					icon = { "", color = { fg = "yellow" } },
+					icon = { "󱨍", color = { fg = "purple" } },
 					cond = function()
 						return require("molten.status").initialized() ~= "Molten"
 					end,
