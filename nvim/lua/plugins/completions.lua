@@ -12,6 +12,20 @@ return {
 				},
 			},
 		},
+		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					{ "lazy.nvim" },
+				},
+				integrations = {
+					{
+						lspconfig = false,
+					},
+				},
+			},
+		},
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 		"saadparwaiz1/cmp_luasnip",
@@ -69,6 +83,7 @@ return {
 				{ name = "luasnip", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer" },
+				{ name = "lazydev", group_index = 0 },
 			}),
 			formatting = {
 				format = lspkind.cmp_format(),
