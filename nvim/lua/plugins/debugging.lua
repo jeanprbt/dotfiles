@@ -1,6 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
-	ft = { "python" },
+	ft = { "python", "go" },
 	dependencies = {
 		{
 			"rcarriga/nvim-dap-ui",
@@ -77,9 +77,9 @@ return {
 		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 		sign("DapStopped", { text = "", texthl = "", linehl = "DiffText", numhl = "" })
 
-		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Add breakpoint (dap)" })
-		vim.keymap.set("n", "<leader>dl", dap.continue, { desc = "Launch/Resume debugging session (dap)" })
-		vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into current instruction (dap)" })
-		vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Step over one instruction (dap)" })
+		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "add _d_ebugging _b_reakpoint (dap)" })
+		vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "launch/resume _d_ebugging _s_ession (dap)" })
+		vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "step into current _d_ebugging _i_nstruction (dap)" })
+		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "step one _d_ebugging instruction _o_ver(dap)" })
 	end,
 }

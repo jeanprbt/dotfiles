@@ -39,12 +39,7 @@ return {
 	config = function(_, opts)
 		local venv = require("venv-selector")
 		venv.setup(opts)
-		vim.keymap.set(
-			"n",
-			"<leader>vs",
-			"<cmd>VenvSelect<cr>",
-			{ desc = "Select python virtual env. (venv-selector)" }
-		)
-		vim.keymap.set("n", "<leader>vd", venv.deactivate, { desc = "Deactivate python virtual env. (venv-selector)" })
+		vim.keymap.set("n", "<leader>sv", "<cmd>VenvSelect<cr>", { desc = "_s_elect python _v_env (venv-selector)" })
+		vim.keymap.set("n", "<leader>dv", venv.deactivate, { desc = "_d_eactivate python _v_env (venv-selector)" })
 	end,
 }

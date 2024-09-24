@@ -14,7 +14,7 @@ return {
 	opts = function()
 		vim.keymap.set("n", "<leader>ft", function()
 			require("conform").format({ bufnr = 0 })
-		end, { desc = "Format file (conform)" })
+		end, { desc = "_f_orma_t_ file (conform)" })
 		return {
 			formatters_by_ft = {
 				lua = { "stylua" },

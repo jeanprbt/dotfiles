@@ -18,10 +18,10 @@ return {
 	},
 	config = function()
 		local lint = require("lint")
-		vim.keymap.set("n", "<leader>l", function()
+		vim.keymap.set("n", "<leader>lt", function()
 			lint.try_lint()
-		end, { desc = "Lint file (lint)" })
-		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+		end, { desc = "_l_in_t_ file (nvim-lint)" })
+		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 			callback = function()
 				lint.try_lint()
 			end,

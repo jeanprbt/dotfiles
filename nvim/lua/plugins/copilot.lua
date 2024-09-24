@@ -3,7 +3,7 @@ return {
 	cmd = "Copilot",
 	event = "InsertEnter",
 	opts = function()
-		vim.keymap.set("n", "<leader>cp", "<cmd>Copilot toggle<cr>", { desc = "Toggle Copilot (copilot)" })
+		vim.keymap.set("n", "<leader>tc", "<cmd>Copilot toggle<cr>", { desc = "_t_oggle _c_opilot (copilot)" })
 		return {
 			panel = {
 				enabled = false,

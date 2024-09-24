@@ -17,7 +17,12 @@ return {
 	},
 	config = function(_, opts)
 		require("bufferline").setup(opts)
-		vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Switch to next tab (bufferline)" })
-		vim.keymap.set("n", "<leader>w", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other tabs (bufferline)" })
+		vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "switch to next tab (bufferline)" })
+		vim.keymap.set(
+			"n",
+			"<leader>ct",
+			"<cmd>BufferLineCloseOthers<cr>",
+			{ desc = "_c_lose other _t_abs (bufferline)" }
+		)
 	end,
 }

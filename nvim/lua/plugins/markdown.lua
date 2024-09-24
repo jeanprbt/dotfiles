@@ -8,7 +8,7 @@ return {
 				"n",
 				"<leader>mr",
 				"<cmd>RenderMarkdown toggle<cr>",
-				{ desc = "Toggle Markdown rendering (render-markdown)" }
+				{ desc = "toggle _m_arkdown _r_endering (render-markdown)" }
 			)
 		end,
 	},
@@ -30,13 +30,7 @@ return {
 				"n",
 				"<leader>mp",
 				"<cmd>MarkdownPreviewToggle<cr>",
-				{ desc = "Preview markdown in browser (markdown-preview)" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>ms",
-				"<cmd>MarkdownPreviewStop<cr>",
-				{ desc = "Stop markdown preview (markdown-preview)" }
+				{ desc = "toggle _m_arkdown _p_review in browser (markdown-preview)" }
 			)
 			local function load_then_exec(cmd)
 				return function()
@@ -47,7 +41,7 @@ return {
 				end
 			end
 
-			for _, cmd in pairs({ "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" }) do
+			for _, cmd in pairs({ "MarkdownPreviewToggle" }) do
 				vim.api.nvim_create_user_command(cmd, load_then_exec(cmd), {})
 			end
 		end,

@@ -14,7 +14,7 @@ return {
 		local toggleterm = require("toggleterm")
 		local terms = require("toggleterm.terminal")
 		toggleterm.setup(opts)
-		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode (toggleterm)" })
+		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "exit terminal mode (toggleterm)" })
 
 		local Terminal = terms.Terminal
 		function _G._lazygit_toggle()
@@ -32,37 +32,31 @@ return {
 				close_on_exit = true,
 			}):toggle()
 		end
-		vim.keymap.set("n", "<leader>tg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "Open lazygit (toggleterm)" })
+		vim.keymap.set("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "open _l_azy_g_it (toggleterm)" })
 		vim.keymap.set(
 			{ "n", "t" },
-			"<leader>th",
+			"<leader>ht",
 			"<cmd>ToggleTerm size=15 direction=horizontal<cr>",
-			{ desc = "Open horizontal terminal (toggleterm)" }
+			{ desc = "open _h_orizontal _t_erminal (toggleterm)" }
 		)
 		vim.keymap.set(
 			"n",
-			"<leader>tp",
+			"<leader>pt",
 			"<cmd>lua _python_toggle()<cr>",
-			{ desc = "Open python terminal (toggleterm)" }
+			{ desc = "open _p_ython _t_erminal (toggleterm)" }
 		)
 		vim.keymap.set(
 			{ "n", "t" },
-			"<leader>tv",
+			"<leader>vt",
 			"<cmd>ToggleTerm size=50 direction=vertical<cr>",
-			{ desc = "Open vertical terminal (toggleterm)" }
+			{ desc = "open _v_ertical _t_erminal (toggleterm)" }
 		)
 		vim.keymap.set(
 			{ "n", "t" },
-			"<leader>tf",
+			"<leader>wt",
 			"<cmd>ToggleTerm direction=float<cr>",
-			{ desc = "Open float terminal (toggleterm)" }
+			{ desc = "open _w_indow _t_erminal (toggleterm)" }
 		)
-		function _G.set_terminal_keymaps()
-			-- vim.keymap.set({ "n", "t" }, "<C-h>", [[<Cmd>wincmd h<cr>]], { desc = "Move to left window (toggleterm)" })
-			-- vim.keymap.set({ "n", "t" }, "<C-j>", [[<Cmd>wincmd j<cr>]], { desc = "Move to below window (toggleterm)" })
-			-- vim.keymap.set({ "n", "t" }, "<C-k>", [[<Cmd>wincmd k<cr>]], { desc = "Move to above window (toggleterm)" })
-			-- vim.keymap.set({ "n", "t" }, "<C-l>", [[<Cmd>wincmd l<cr>]], { desc = "Move to right window (toggleterm)" })
-		end
 		function _G.open_next_terminal()
 			local terminals = terms.get_all()
 			local direction = terminals[1].direction
@@ -73,10 +67,9 @@ return {
 		end
 		vim.api.nvim_set_keymap(
 			"t",
-			"<leader>tt",
+			"<leader>nt",
 			"<cmd>lua open_next_terminal()<cr>",
-			{ noremap = true, silent = true }
+			{ desc = "open _n_ext _t_erminal (toggleterm)" }
 		)
-		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 	end,
 }

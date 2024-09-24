@@ -174,7 +174,7 @@ return {
 					},
 				},
 				mode = { "n" },
-				body = "<leader>n",
+				body = "<leader>no",
 				heads = {
 					{
 						"j",
@@ -203,13 +203,13 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>n", function()
+			vim.keymap.set("n", "<leader>no", function()
 				if require("molten.status").initialized() == "Molten" then
 					notebook:activate()
 				else
 					vim.notify("Notebook mode is only available for *.ipynb files.")
 				end
-			end, { desc = "Trigger Notebook mode (hydra)" })
+			end, { desc = "trigger _no_tebook mode (hydra)" })
 		end,
 	},
 	{

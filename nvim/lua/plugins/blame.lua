@@ -13,6 +13,6 @@ return {
 	config = function(_, opts)
 		require("gitblame").setup(opts)
 		vim.api.nvim_set_hl(0, "GitBlame", { fg = "#e34626", italic = true })
-		vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<cr>", { desc = "Toggle git blame (git-blame)" })
+		vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<cr>", { desc = "toggle _g_it _b_lame (git-blame)" })
 	end,
 }

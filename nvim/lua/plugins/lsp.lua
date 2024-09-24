@@ -53,15 +53,15 @@ return {
 					},
 				},
 			})
-			vim.keymap.set("n", "H", vim.lsp.buf.hover, { desc = "Show hover information (lsp)" })
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition (lsp)" })
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions (lsp)" })
+			vim.keymap.set("n", "H", vim.lsp.buf.hover, { desc = "show _H_over information (lsp)" })
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "_g_o to _d_efinition (lsp)" })
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "show _c_ode _a_ctions (lsp)" })
 		end,
 	},
 	{
 		"smjonas/inc-rename.nvim",
 		opts = function()
-			vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Rename occurences (inc-rename)" })
+			vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "_r_e_n_ame occurences (inc-rename)" })
 			return {}
 		end,
 	},

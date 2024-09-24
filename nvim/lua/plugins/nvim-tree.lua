@@ -32,7 +32,7 @@ return {
 	},
 	config = function(_, opts)
 		require("nvim-tree").setup(opts)
-		vim.keymap.set("n", "<leader><Space>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file explorer (nvim-tree)" })
-		vim.keymap.set("n", "<leader>;", "<cmd>NvimTreeFocus<cr>", { desc = "Focus file explorer (nvim-tree)" })
+		vim.keymap.set("n", "<leader><Space>", "<cmd>NvimTreeToggle<cr>", { desc = "toggle file explorer (nvim-tree)" })
+		vim.keymap.set("n", "<leader>;", "<cmd>NvimTreeFocus<cr>", { desc = "focus file explorer (nvim-tree)" })
 	end,
 }

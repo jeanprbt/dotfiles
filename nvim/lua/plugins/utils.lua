@@ -44,4 +44,21 @@ return {
 		build = "./kitty/install-kittens.bash",
 		opts = {},
 	},
+	{
+		"fouladi/toggle-overlength.nvim",
+		opts = {},
+		config = function(_, opts)
+			require("toggle-overlength").setup(opts)
+			vim.api.nvim_create_autocmd("bufReadPre", {
+				command = "ToggleHiOverLength",
+			})
+			vim.keymap.del("n", "<leader>th")
+			vim.keymap.set(
+				"n",
+				"<leader>to",
+				"<cmd>ToggleHiOverLength<cr>",
+				{ desc = "_t_oggle _o_verlength line (toggle-overlength)" }
+			)
+		end,
+	},
 }

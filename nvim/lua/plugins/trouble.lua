@@ -11,13 +11,13 @@ return {
 			"n",
 			"<leader>tr",
 			"<cmd>Trouble lsp_references toggle filter.buf=0<cr>",
-			{ desc = "Toggle references (trouble)" }
+			{ desc = "_t_rouble references (trouble)" }
 		)
 		vim.keymap.set(
 			"n",
 			"<leader>td",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			{ desc = "Toggle diagnostics (trouble)" }
+			{ desc = "_t_rouble diagnostics (trouble)" }
 		)
 	end,
 }

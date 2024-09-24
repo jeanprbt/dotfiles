@@ -9,6 +9,10 @@ return {
 		local config = require("nvim-treesitter.configs")
 		config.setup({
 			ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "python", "java", "markdown" },
+			sync_install = false,
+			auto_install = true,
+			modules = {},
+			ignore_install = {},
 			highlight = { enable = true },
 			indent = { enable = true },
 			textobjects = {
@@ -18,13 +22,13 @@ return {
 					goto_next_start = {
 						["J"] = {
 							query = "@block.inner",
-							desc = "Move to next code block (treesitter)",
+							desc = "move to next code block (treesitter)",
 						},
 					},
 					goto_previous_start = {
 						["K"] = {
 							query = "@block.inner",
-							desc = "Move to previous code block (treesitter)",
+							desc = "move to previous code block (treesitter)",
 						},
 					},
 				},
@@ -41,13 +45,13 @@ return {
 					swap_next = {
 						["sn"] = {
 							query = "@block.outer",
-							desc = "Swap with next code block (treesitter)",
+							desc = "_s_wap with _n_ext code block (treesitter)",
 						},
 					},
 					swap_previous = {
-						["sb"] = {
+						["sp"] = {
 							query = "@block.outer",
-							desc = "Swap with previous code block (treesitter)",
+							desc = "_s_wap with _p_revious code block (treesitter)",
 						},
 					},
 				},
