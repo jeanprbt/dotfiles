@@ -4,12 +4,16 @@ return {
 	dependencies = {
 		"fouladi/toggle-overlength.nvim", -- ensure <leader>th shortcut is deleted --
 	},
-	opts = {
-		open_mapping = "<C-t>",
-		float_opts = {
-			border = "curved",
-		},
-	},
+	opts = function()
+		local highlights = require("rose-pine.plugins.toggleterm")
+		return {
+			open_mapping = "<C-t>",
+			highlights = highlights,
+			float_opts = {
+				border = "curved",
+			},
+		}
+	end,
 	config = function(_, opts)
 		local toggleterm = require("toggleterm")
 		local terms = require("toggleterm.terminal")

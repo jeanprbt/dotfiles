@@ -46,7 +46,9 @@ return {
 	},
 	{
 		"fouladi/toggle-overlength.nvim",
-		opts = {},
+		opts = {
+			guibg = "#c8c3bd",
+		},
 		config = function(_, opts)
 			require("toggle-overlength").setup(opts)
 			vim.api.nvim_create_autocmd("bufReadPre", {
@@ -55,9 +57,9 @@ return {
 			vim.keymap.del("n", "<leader>th")
 			vim.keymap.set(
 				"n",
-				"<leader>to",
+				"<leader>ol",
 				"<cmd>ToggleHiOverLength<cr>",
-				{ desc = "_t_oggle _o_verlength line (toggle-overlength)" }
+				{ desc = "toggle _o_ver_l_ength line (toggle-overlength)" }
 			)
 		end,
 	},

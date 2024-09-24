@@ -10,7 +10,7 @@ from kitty.tab_bar import (
 )
 
 opts = get_options()
-surface = as_rgb(int("cdd6f4", 16))
+surface = as_rgb(int("d7827d", 16))
 window_icon = ""
 layout_icon = ""
 time_icon = ""
