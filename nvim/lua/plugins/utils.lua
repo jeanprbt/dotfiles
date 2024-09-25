@@ -71,4 +71,22 @@ return {
 			)
 		end,
 	},
+	{
+		"VonHeikemen/searchbox.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			vim.keymap.set("n", "<leader>sr", function()
+				require("searchbox").replace({ show_matches = "[{total}]", confirm = "menu" })
+			end, { desc = "_s_earch & _r_eplace (searchbox)" })
+			vim.keymap.set("v", "<leader>sr", function()
+				require("searchbox").replace({
+					visual_mode = true,
+					show_matches = "[{total}]",
+					confirm = "menu",
+				})
+			end, { desc = "_s_earch & _r_eplace (searchbox)" })
+		end,
+	},
 }

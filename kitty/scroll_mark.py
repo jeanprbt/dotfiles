@@ -1,4 +1,6 @@
+# pyright: reportMissingImports=false
 from kittens.tui.handler import result_handler
+
 from kitty.boss import Boss
 
 

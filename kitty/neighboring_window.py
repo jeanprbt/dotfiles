@@ -1,5 +1,7 @@
-from kitty.key_encoding import KeyEvent, parse_shortcut
+# pyright: reportMissingImports=false
 from kittens.tui.handler import result_handler
+
+from kitty.key_encoding import KeyEvent, parse_shortcut
 
 
 def main():
