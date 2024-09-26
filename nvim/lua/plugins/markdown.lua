@@ -46,4 +46,13 @@ return {
 			end
 		end,
 	},
+	{
+		"jbyuki/nabla.nvim",
+		config = function()
+			local nabla = require("nabla")
+			vim.keymap.set("n", "<leader>mn", function()
+				nabla.toggle_virt()
+			end, { desc = "toggle _m_arkdown _n_abla (nabla)" })
+		end,
+	},
 }

@@ -57,6 +57,7 @@ return {
 						padding = { right = 1, left = 1 },
 						separator = { left = "", right = "" },
 					},
+					"diagnostics",
 				},
 				lualine_c = {
 					{

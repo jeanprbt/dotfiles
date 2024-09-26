@@ -90,7 +90,7 @@ _fzf_comprun() {
 }
 
 # -- scat (super cat) --
-export BAT_THEME="Dracula"
+export BAT_THEME="ansi"
 alias cat="scat"
 
 # -- eza (better ls) --
