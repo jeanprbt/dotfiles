@@ -34,6 +34,7 @@ return {
 		build = "make tiktoken",
 		opts = {
 			question_header = " Me ",
+			answer_header = " Copilot ",
 			show_help = false,
 			window = {
 				width = 0.25,

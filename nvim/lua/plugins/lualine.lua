@@ -16,7 +16,7 @@ return {
 				theme = "rose-pine",
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "•", right = "•" },
-				disabled_filetypes = { "copilot-chat" },
+				disabled_filetypes = { "copilot-chat", "neotest-summary" },
 			},
 			sections = {
 				lualine_a = {

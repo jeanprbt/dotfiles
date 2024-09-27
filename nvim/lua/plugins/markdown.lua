@@ -2,8 +2,11 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("render-markdown").setup()
+		opts = {
+			file_types = { "markdown", "copilot-chat" },
+		},
+		config = function(_, opts)
+			require("render-markdown").setup(opts)
 			vim.keymap.set(
 				"n",
 				"<leader>mr",
