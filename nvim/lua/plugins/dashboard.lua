@@ -10,6 +10,10 @@ return {
 				end
 			end)
 		end, {})
+		vim.api.nvim_create_user_command("DashboardOpenFolder", function()
+			vim.cmd("enew")
+			vim.cmd("NvimTreeFocus")
+		end, {})
 		return {
 			theme = "hyper",
 			config = {
@@ -42,9 +46,9 @@ return {
 						key = "f",
 					},
 					{
-						desc = " Recents",
+						desc = " Folder",
 						group = "@property",
-						action = "Telescope oldfiles",
+						action = "DashboardOpenFolder",
 						key = "a",
 					},
 					{
