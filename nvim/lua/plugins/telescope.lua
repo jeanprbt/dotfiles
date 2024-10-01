@@ -21,8 +21,7 @@ return {
 					mappings = {
 						i = {
 							["<esc>"] = actions.close,
-							["<C-S-k>"] = actions.move_selection_previous,
-							["<C-S-j>"] = actions.move_selection_next,
+							["<Tab>"] = actions.move_selection_next,
 						},
 					},
 				},
@@ -38,6 +37,7 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "_f_ind _f_ile (telescope)" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "_f_ind _g_rep string (telescope)" })
+			vim.keymap.set("n", "<leader>fu", builtin.lsp_references, { desc = "_f_ind _u_sages (telescope)" })
 		end,
 	},
 }
