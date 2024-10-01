@@ -25,13 +25,13 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # -- Completions --
 
 # Git
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+zstyle ':completion:*:*:git:*' script ~/.dotfiles/zsh/completions/git-completion.bash
 
 # Brew
 fpath=(/opt/homebrew/completions/zsh \\$fpath)
 
-# Load completions in .zsh directory (git, gh, conda, etc.)
-fpath=(~/.zsh \\$fpath)
+# Load other completions (git, gh, conda, etc.)
+fpath=(~/.dotfiles/zsh/completions \\$fpath)
 autoload -Uz compinit && compinit
 
 # -- Syntax highlighting --
@@ -41,9 +41,6 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white,bg=none'
 # -- Set up fzf key bindings and fuzzy completion --
 eval "$(fzf --zsh)"
 export FZF_COMPLETION_TRIGGER=','
-
-# -- Add fzf-git support --
-source ~/.fzf-git/fzf-git.sh
 
 # -- Use fd instead of fzf --
 # Ctrl-T
