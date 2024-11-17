@@ -28,16 +28,16 @@ mv ~/.config/kitty ~/.config/kitty.bak
 mv ~/.config/nvim ~/.config/nvim.bak
 ```
 
-+ Clone the present repo in your `$HOME` directory.
++ Clone this repo in your `$HOME` directory.
 ```sh
 git clone https://github.com/jeanprbt/dotfiles.git ~/.dotfiles
 ```
 
-+ Create symlinks from your `$HOME` directory.
++ Create symlinks to your `$HOME` directory.
 ```sh
-ln -s ~/.dotfiles/zsh/.zshrc .zshrc
-ln -s ~/.dotfiles/kitty .config/kitty
-ln -s ~/.dotfiles/nvim .config/nvim
+ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/kitty ~/.config/kitty
+ln -s ~/.dotfiles/nvim ~/.config/nvim
 ```
 
 + Start `kitty`, and you should be done !
@@ -45,7 +45,6 @@ ln -s ~/.dotfiles/nvim .config/nvim
 
 ### Configuration details
 
-*I inverted my `caps lock` and my `ctrl` keys so as to be more comfortable using keyboard shortcuts.*
 
 #### `zsh`
 
@@ -88,7 +87,6 @@ I configured `<C-r>` shortcut to go through my previous commands, and `C-t` shor
 
 Thanks to `kitty` terminal and its image graphics protocol, I designed a super-`cat` command to display pretty much everything I need to display. Setting an alias for `cat`, I can seamlessly output `pdf`, `markdown`, `jpg/png` files as well as more standard files, that are prettier thanks to [`bat`](https://github.com/sharkdp/bat). You can enable this command adding your `dotfiles` repository to your `$PATH`, or creating a symlink from one directory on your `$PATH` to the `scat` file. 
 
-
 ![images](./docs/image.png)
 ![pdf](./docs/pdf.png)
 
@@ -115,4 +113,26 @@ That's pretty much everything that is interesting in my `zsh` config !
 
 #### `kitty`
 
-#### `neovim`
+Let's carry on with the terminal emulator ! `kitty` is one of the most advanced out there. What makes it so special is its graphics protocol, which enables viewing images using a full resolution directly within the terminal. Out of the box, it already features pane-splitting and multi-tabs, but I've set some custom shortcuts to really make this emulator mine. Most of the configuration happens in file `kitty.conf`, which can be extended using additional `.py` files. 
+
+##### Tab bar
+
+The built-in tab bar was not enough for me, that's why I added a custom bar (thanks to this [comment](https://github.com/kovidgoyal/kitty/discussions/4447#discussioncomment-8736005)) using `tab_bar.py` file. It displays current window in a prettier way, and adds the current kitty [layout](https://sw.kovidgoyal.net/kitty/layouts/), the number of panes and the time on the right.
+
+##### Search
+
+`kitty` does not have a built-in search, that's why I had to use this [plugin](https://github.com/trygveaa/kitty-kitten-search), which adds additional files `scroll_mark.py` and `search.py`.
+
+##### Shortcuts
+
+I decided to keep all shortcuts involving the `cmd` key for `kitty`.
+
+| Shortcut | Action |
+| -------------- | --------------- |
+| `<cmd-k>` | clear terminal |
+| `<cmd-c>`/`<cmd-v>` | copy/paste |
+| `<ctrl-/>`| vertical split |
+| `<ctrl-_>`| horizontal split |
+| `<cmd-enter>`| new window |
+| `<cmd-enter>`| new window |
+

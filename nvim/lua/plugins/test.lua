@@ -42,6 +42,9 @@ return {
 					running = " ",
 					failed = " ",
 				},
+				output = {
+					open_on_run = true,
+				},
 			}
 		end,
 		config = function(_, opts)
