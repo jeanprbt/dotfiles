@@ -18,7 +18,6 @@ return {
 		return {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				go = { "gofumpt", "golines" },
 				python = { "isort" },
 			},
 			format_on_save = {

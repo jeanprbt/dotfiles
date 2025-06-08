@@ -1,5 +1,26 @@
 return {
 	{
+		"3rd/image.nvim",
+		event = "VeryLazy",
+		opts = {
+			backend = "kitty",
+			integrations = {
+				markdown = {
+					enabled = true,
+					only_render_image_at_cursor = true,
+					filetypes = { "markdown" },
+				},
+			},
+			max_width = 100,
+			max_height = 12,
+			max_height_window_percentage = math.huge,
+			max_width_window_percentage = math.huge,
+			window_overlap_clear_enabled = true,
+			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+			window_background_opacity = 100,
+		},
+	},
+	{
 		"echasnovski/mini.pairs",
 		config = true,
 	},
@@ -59,9 +80,6 @@ return {
 		end,
 		config = function(_, opts)
 			require("toggle-overlength").setup(opts)
-			vim.api.nvim_create_autocmd("bufReadPre", {
-				command = "ToggleHiOverLength",
-			})
 			vim.keymap.del("n", "<leader>th")
 			vim.keymap.set(
 				"n",

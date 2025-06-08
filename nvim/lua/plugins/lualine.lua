@@ -4,8 +4,6 @@ return {
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"AndreM222/copilot-lualine",
-		"nvimtools/hydra.nvim",
-		"benlubas/molten-nvim",
 		"linux-cultist/venv-selector.nvim",
 	},
 	opts = function()
@@ -33,19 +31,9 @@ return {
 								S = "S-LINE",
 								t = "TERMINAL",
 							}
-							if require("hydra.statusline").is_active() then
-								return "NOTEBOOK"
-							else
-								return modes[vim.fn.mode()]
-							end
+							return modes[vim.fn.mode()]
 						end,
-						color = function()
-							if require("hydra.statusline").is_active() then
-								return { bg = blue, gui = "bold" }
-							else
-								return { gui = "bold" }
-							end
-						end,
+						color = { gui = "bold" },
 						separator = { right = "" },
 					},
 				},
@@ -63,20 +51,6 @@ return {
 				lualine_c = {
 					{
 						"filename",
-						cond = function()
-							return not require("hydra.statusline").is_active()
-						end,
-					},
-					{
-						function()
-							local hydra = require("hydra.statusline")
-							if hydra.is_active() then
-								return hydra.get_hint()
-							end
-						end,
-						cond = function()
-							return require("hydra.statusline").is_active()
-						end,
 					},
 				},
 				lualine_x = {
@@ -121,19 +95,6 @@ return {
 					},
 					{
 						function()
-							return "kernel : " .. require("molten.status").kernels()
-						end,
-						icon = { "", color = { fg = pink } },
-						cond = function()
-							return require("molten.status").initialized() == "Molten" and vim.bo.filetype == "markdown"
-						end,
-						on_click = function()
-							vim.cmd("MoltenDeinit")
-							vim.cmd("MoltenInit")
-						end,
-					},
-					{
-						function()
 							local clients = vim.lsp.get_clients({ bufnr = 0 })
 							if #clients == 0 then
 								return ""
@@ -147,9 +108,6 @@ return {
 							return table.concat(client_names, ", ")
 						end,
 						icon = { "󱉶", color = { fg = pink } },
-						cond = function()
-							return require("molten.status").initialized() ~= "Molten"
-						end,
 					},
 					{
 						function()
@@ -173,9 +131,6 @@ return {
 							return table.concat(client_names, ", ")
 						end,
 						icon = { "󱨍", color = { fg = pink } },
-						cond = function()
-							return require("molten.status").initialized() ~= "Molten"
-						end,
 					},
 					{
 						function()
@@ -192,32 +147,18 @@ return {
 							return table.concat(client_names, ", ")
 						end,
 						icon = { "󰛖", color = { fg = pink } },
-						cond = function()
-							return require("molten.status").initialized() ~= "Molten"
-						end,
 					},
 					"filetype",
 				},
 				lualine_y = {
 					{
 						"progress",
-						color = function()
-							if require("hydra.statusline").is_active() then
-								return { fg = blue }
-							end
-						end,
 					},
 				},
 				lualine_z = {
 					{
 						"location",
-						color = function()
-							if require("hydra.statusline").is_active() then
-								return { bg = blue, gui = "bold" }
-							else
-								return { gui = "bold" }
-							end
-						end,
+						color = { gui = "bold" },
 					},
 				},
 			},

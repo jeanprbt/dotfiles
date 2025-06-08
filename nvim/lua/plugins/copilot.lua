@@ -26,7 +26,6 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim" },
@@ -36,6 +35,7 @@ return {
 			question_header = " Me ",
 			answer_header = " Copilot ",
 			show_help = false,
+			chat_autocomplete = true,
 			window = {
 				width = 0.25,
 				border = "none",
@@ -43,7 +43,6 @@ return {
 		},
 		config = function(_, opts)
 			require("CopilotChat").setup(opts)
-			require("CopilotChat.integrations.cmp").setup()
 			vim.keymap.set(
 				{ "n", "v" },
 				"<leader>cc",

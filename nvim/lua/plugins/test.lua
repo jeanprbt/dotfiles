@@ -1,25 +1,22 @@
 return {
 	{
 		"nvim-neotest/neotest",
-		ft = { "go" },
+		-- Load for all filetypes to allow adding multiple adapters later
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			{
-				"fredrikaverpil/neotest-golang",
-				dependencies = {
-					"leoluz/nvim-dap-go",
-				},
+				"nvim-neotest/neotest-python",
+				dependencies = { "nvim-neotest/neotest" },
 			},
 		},
 		opts = function()
 			return {
 				adapters = {
-					require("neotest-golang")({
-						testify_enabled = true,
-						runner = "gotestsum",
+					require("neotest-python")({
+						dap = { justMyCode = false },
 					}),
 				},
 				summary = {

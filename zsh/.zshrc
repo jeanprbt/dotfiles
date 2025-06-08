@@ -1,67 +1,62 @@
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# -------- P10K THEME --------
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+[[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+[[ -f "$HOME/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme" ]] && source "$HOME/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme"
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# -- History setup --
+# -------- HISTORY SETUP --------
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
 HISTSIZE=999
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
+setopt share_history hist_ignore_dups hist_expire_dups_first hist_verify
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
+# -------- PATH --------
+export PATH="$HOME/.local/bin:$PATH"
 
-# -- Auto suggestions --
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# -------- AUTO-SUGGESTIONS --------
+source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# -- Completions --
-
-# Git
-zstyle ':completion:*:*:git:*' script ~/.dotfiles/zsh/completions/git-completion.bash
-
-# Brew
-fpath=(/opt/homebrew/completions/zsh \\$fpath)
-
-# Load other completions (git, gh, conda, etc.)
+# -------- COMPLETIONS SETUP --------
+source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
 fpath=(~/.dotfiles/zsh/completions \\$fpath)
+if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+elif [[ -d "/usr/share/zsh/site-functions" ]]; then
+  fpath=(/usr/share/zsh/site-functions $fpath)
+elif [[ -d "/usr/local/share/zsh/site-functions" ]]; then
+  fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
 autoload -Uz compinit && compinit
 
-# -- Syntax highlighting --
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ------ SYNTAX HIGHLIGHTING ------
+source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white,bg=none'
 
-# -- Set up fzf key bindings and fuzzy completion --
+# -------- FZF --------
 eval "$(fzf --zsh)"
 export FZF_COMPLETION_TRIGGER=','
-
-# -- Use fd instead of fzf --
-# Ctrl-T
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git --exclude node_modules --exclude .idea --exclude venv"
+if [[ "$(uname)" == "Linux" ]]; then
+	export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --strip-cwd-prefix --exclude .git --exclude node_modules --exclude .idea --exclude venv'
+else
+	export FZF_DEFAULT_COMMAND='fd --type f --hidden --strip-cwd-prefix --exclude .git --exclude node_modules --exclude .idea --exclude venv'
+fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git --exclude node_modules --exclude .idea --exclude venv"
+export FZF_ALT_C_COMMAND='fd --type=d --hidden --strip-cwd-prefix --exclude .git --exclude node_modules --exclude .idea --exclude venv'
 
-  # **/
 _fzf_compgen_path() {
- 	fd --hidden --exclude .git --exclude node_modules --exclude .idea --exclude venv . "$1"
+	fd --hidden --exclude .git --exclude node_modules --exclude .idea --exclude venv . "$1"
 }
 _fzf_compgen_dir() {
 	fd --type=d --hidden --exclude .git --exclude node_modules --exclude .idea --exclude venv . "$1"
 }
 
-# -- Set up preview w/ fzf and bat --
 show_file_or_dir_preview='
 if [ -d {} ]; 
-    then eza --tree --color=always {} | head -200; 
+then eza --tree --color=always {} | head -200; 
 elif [[ {} =~ (".jpg"|".JPG"|".jpeg"|".png"|".PNG")$ ]]; 
-    then kitten icat --clear --transfer-mode=memory --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {} | sed \$d; 
+then kitten icat --clear --transfer-mode=memory --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {} | sed \$d; 
 elif [[ {} =~ (".pdf"|".PDF")$ ]]; then 
     pdftoppm -singlefile {} -tiffcompression jpeg | kitten icat --transfer-mode=memory --unicode-placeholder --clear --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@20x1; 
 elif [[ {} =~ (".md"|".MD")$ ]];
@@ -74,7 +69,6 @@ fi
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
-# -- Add support for files, ssh, env var. --
 _fzf_comprun() {
 	local command=$1
     shift
@@ -86,84 +80,122 @@ _fzf_comprun() {
 	esac
 }
 
-# -- scat (super cat) --
+# ------ BAT (BETTER CAT) ------
 export BAT_THEME="ansi"
-alias cat="scat"
 
-# -- eza (better ls) --
-alias ls="eza --color=always --git --icons=always --oneline"
-
-# -- TheF*ck (mis-spelled commands) -- 
-# thefuck alias
-eval $(thefuck --alias)
-
-# -- Zoxide (better cd) --
+# ------ ZOXIDE (BETTER CD) ------
 eval "$(zoxide init zsh)"
-alias cd="z"
 
-# -- Python3 / Pip3 aliases --
+# ------ SCAT (CUSTOM SUPER CAT) ------
+scat() {
+    lowercase() {
+        echo "$1" | tr '[:upper:]' '[:lower:]'
+    }
+    if [[ "$(uname)" == "Linux" ]]; then
+        BAT_CMD="batcat"
+    else
+        BAT_CMD="bat"
+    fi
+    if [ $# -eq 0 ]; then
+        echo "Usage: scat <file|directory>"
+    fi
+    for file in "$@"; do
+        if [ ! -e "$file" ]; then
+            echo "File or directory not found: $file"
+            continue
+        fi
+        if [ -d "$file" ]; then
+            if command -v eza >/dev/null 2>&1; then
+                eza --tree --color=always "$file" | head -200
+            else
+                ls -l "$file" | head -200
+            fi
+            continue
+        fi
+        extension="${file##*.}"
+        extension=$(lowercase "$extension")
+        case "$extension" in
+        md | markdown)
+            if command -v mdcat >/dev/null 2>&1; then
+                mdcat "$file"
+            else
+                cat "$file"
+            fi
+            ;;
+        pdf)
+            if command -v tdf >/dev/null 2>&1; then
+                tdf "$file"
+            else
+                cat "$file"
+            fi
+            ;;
+        jpg | jpeg | png | gif | bmp | tiff)
+            if command -v kitty >/dev/null 2>&1; then
+                kitty +kitten icat "$file"
+            else
+                cat "$file"
+            fi
+            ;;
+        *)
+            if command -v "$BAT_CMD" >/dev/null 2>&1; then
+                "$BAT_CMD" "$file"
+            else
+                cat "$file"
+            fi
+            ;;
+        esac
+    done
+}
+
+# ------ ALIASES ------
+alias ls="eza --color=always --git --icons=always --oneline"
+alias cd="z"
+alias cat="scat"
 alias python="python3"
 alias pip="pip3"
-
-# -- Image cat alias --
-alias icat="kitten icat"
-
-# -- Created by `pipx` --
-export PATH="$PATH:/Users/jeanperbet/.local/bin"
-
-# -- Virtualenvwrapper --
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/.virtualenvsprojs
-export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
-source /opt/homebrew/bin/virtualenvwrapper.sh
-
-# -- image.nvim --
-export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
-
-# -- Jupyter kernels --
-export PYDEVD_DISABLE_FILE_VALIDATION=1
-
-# go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-
-# -- Theme toggling --
-KITTY_FILE="$HOME/.config/kitty/kitty.conf"
-toggle-theme() {
-	current_theme=$(awk '$1=="include" {print $2}' "$HOME/.config/kitty/kitty.conf")
-	new_theme="rose-pine-moon.conf"
-	if [ "$current_theme" = "rose-pine-moon.conf" ]; then
-		new_theme="rose-pine-dawn.conf"
-        alias nvim='nvim --cmd "set background=light"'
-        sed -i '' 's/393552/faf4ed/g' "$KITTY_FILE"
-    else 
-        alias nvim='nvim --cmd "set background=dark"'
-        sed -i '' 's/faf4ed/393552/g' "$KITTY_FILE"
-	fi
-	kitty @ set-colors --all --configured "~/.config/kitty/$new_theme"
-	sed -i '' -e "s/include.*/include $new_theme/" "$HOME/.config/kitty/kitty.conf"
-    kill -SIGUSR1 $KITTY_PID
-}
-current_theme=$(awk '$1=="include" {print $2}' "$HOME/.config/kitty/kitty.conf")
-if [ "$current_theme" = "rose-pine-moon.conf" ]; then
-    alias nvim='nvim --cmd "set background=dark"'
-else 
-    alias nvim='nvim --cmd "set background=light"'
+if [[ "$(uname)" == "Linux" ]]; then
+  if command -v batcat >/dev/null 2>&1; then
+    alias bat="batcat"
+  fi
+  if command -v fdfind >/dev/null 2>&1; then
+    alias fd="fdfind" 
+  fi
 fi
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+# -------- KITTY THEME TOGGLING --------
+KITTY_FILE="$HOME/.config/kitty/kitty.conf"
+if [[ "$(uname)" == "Linux" ]]; then
+	SED_INPLACE=(-i '')
+elif [[ "$(uname)" == "Darwin" ]]; then
+	SED_INPLACE=(-i)
 else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+	echo "Unsupported OS: $(uname)"
+	SED_INPLACE=()
+fi
+if [ -f "$KITTY_FILE" ]; then
+    if command -v kitty >/dev/null 2>&1; then
+	toggle-theme() {
+		current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
+		new_theme="rose-pine-moon.conf"
+		if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+			new_theme="rose-pine-dawn.conf"
+			alias nvim='nvim --cmd "set background=light"'
+			sed "$SED_INPLACE" 's/393552/faf4ed/g' "$KITTY_FILE"
+		else 
+			alias nvim='nvim --cmd "set background=dark"'
+			sed "$SED_INPLACE" 's/faf4ed/393552/g' "$KITTY_FILE"
+		fi
+		kitty @ set-colors --all --configured "$HOME/.config/kitty/$new_theme"
+		sed "$SED_INPLACE" -e "s|^include .*|include $new_theme|" "$KITTY_FILE"
+	    	if [ -n "$KITTY_PID" ]; then
+			kill -SIGUSR1 "$KITTY_PID"
+		fi
+	}
+	current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
+	if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+	    alias nvim='nvim --cmd "set background=dark"'
+	else 
+		alias nvim='nvim --cmd "set background=light"'
+	fi
     fi
 fi
-unset __conda_setup
-# <<< conda initialize <<<

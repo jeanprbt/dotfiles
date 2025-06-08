@@ -11,7 +11,6 @@ return {
 			opts = {
 				ensure_installed = {
 					"ruff",
-					"golangci-lint",
 				},
 			},
 		},
@@ -28,12 +27,6 @@ return {
 		})
 		lint.linters_by_ft = {
 			python = { "ruff" },
-			go = { "golangcilint" },
-		}
-		lint.linters.golangcilint.args = {
-			"run",
-			"--out-format",
-			"json",
 		}
 	end,
 }
