@@ -15,6 +15,9 @@ bindkey "^[[B" history-search-forward
 # -------- PATH --------
 export PATH="$HOME/.local/bin:$PATH"
 
+# linux-specific, do not commit
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 # -------- AUTO-SUGGESTIONS --------
 source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -91,19 +94,39 @@ scat() {
     lowercase() {
         echo "$1" | tr '[:upper:]' '[:lower:]'
     }
+
+    local use_p_flag=0
+    local files=()
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -p)
+                use_p_flag=1
+                shift
+                ;;
+            *)
+                files+=("$1")
+                shift
+                ;;
+        esac
+    done
+
+    if [ ${#files[@]} -eq 0 ]; then
+        echo "Usage: scat [-p] <file|directory>"
+        return 1
+    fi
+
     if [[ "$(uname)" == "Linux" ]]; then
         BAT_CMD="batcat"
     else
         BAT_CMD="bat"
     fi
-    if [ $# -eq 0 ]; then
-        echo "Usage: scat <file|directory>"
-    fi
-    for file in "$@"; do
+
+    for file in "${files[@]}"; do
         if [ ! -e "$file" ]; then
             echo "File or directory not found: $file"
             continue
         fi
+
         if [ -d "$file" ]; then
             if command -v eza >/dev/null 2>&1; then
                 eza --tree --color=always "$file" | head -200
@@ -112,37 +135,43 @@ scat() {
             fi
             continue
         fi
+
         extension="${file##*.}"
         extension=$(lowercase "$extension")
+
         case "$extension" in
-        md | markdown)
-            if command -v mdcat >/dev/null 2>&1; then
-                mdcat "$file"
-            else
-                cat "$file"
-            fi
-            ;;
-        pdf)
-            if command -v tdf >/dev/null 2>&1; then
-                tdf "$file"
-            else
-                cat "$file"
-            fi
-            ;;
-        jpg | jpeg | png | gif | bmp | tiff)
-            if command -v kitty >/dev/null 2>&1; then
-                kitty +kitten icat "$file"
-            else
-                cat "$file"
-            fi
-            ;;
-        *)
-            if command -v "$BAT_CMD" >/dev/null 2>&1; then
-                "$BAT_CMD" "$file"
-            else
-                cat "$file"
-            fi
-            ;;
+            md|markdown)
+                if command -v mdcat >/dev/null 2>&1; then
+                    mdcat "$file"
+                else
+                    cat "$file"
+                fi
+                ;;
+            pdf)
+                if command -v tdf >/dev/null 2>&1; then
+                    tdf "$file"
+                else
+                    cat "$file"
+                fi
+                ;;
+            jpg|jpeg|png|gif|bmp|tiff)
+                if command -v kitty >/dev/null 2>&1; then
+                    kitty +kitten icat "$file"
+                else
+                    cat "$file"
+                fi
+                ;;
+            *)
+                if command -v "$BAT_CMD" >/dev/null 2>&1; then
+                    if [ $use_p_flag -eq 1 ]; then
+                        "$BAT_CMD" -p "$file"
+                    else
+                        "$BAT_CMD" "$file"
+                    fi
+                else
+                    cat "$file"
+                fi
+                ;;
         esac
     done
 }
@@ -198,4 +227,9 @@ if [ -f "$KITTY_FILE" ]; then
 		alias nvim='nvim --cmd "set background=light"'
 	fi
     fi
+fi
+
+# ------ NVIM ------
+if [[ "$(uname)" == "Darwin" ]]; then
+    export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 fi

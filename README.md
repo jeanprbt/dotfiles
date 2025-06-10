@@ -1,32 +1,28 @@
 # My terminal configuration
 
-This repository contains all the needed configuration files for an outstanding terminal featuring multi-tabs, pane-splitting, images & `.pdf` display, improved common commands and an amazing IDE-like text editor.
+This repository contains all the needed configuration files for an outstanding terminal featuring multi-tabs, pane-splitting, images display, improved common commands and an amazing IDE-like text editor.
 
 It was curated for **macOS** and **Linux**, and it leverages awesome [`Rosé Pine`](https://rosepinetheme.com) theme, offering both light & dark modes, as well as [`MesloLGS`](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) font.
 
 ![hero](./docs/hero.png)
 
-## Overview
+## Installation
 
-The whole configuration relies on four components.
+The whole configuration relies on $3$ components.
 
 - A shell => [`zsh`](https://fr.wikipedia.org/wiki/Z_Shell)
 - A terminal emulator => [`kitty`](https://sw.kovidgoyal.net/kitty/)
 - An embedded IDE => [`neovim`](https://neovim.io)
 
-*You can find details below*.
-
-## Installation
-
-This repository is adapted for both **macOS** and **Linux**, please follow these instructions according to your OS.
-
-- (Linux only) Make sure your shell is `zsh`
+Let's dive into each of these components step-by-step. The configuration is adapted to both **macOS** & **Linux**, please follow the next instructions according to your OS. To get started, clone this repository in your `$HOME` directory.
 
 ```sh
-echo $SHELL
+git clone https://github.com/jeanprbt/dotfiles.git ~/.dotfiles
 ```
 
-If it is another one, run the following commands.
+### Shell
+
+You need to make sure that your shell is `zsh`, using `echo $SHELL`. It should be case on macOS since it is the default shell, here's how to change it otherwise.
 
 ```sh
 apt update
@@ -34,175 +30,97 @@ apt install zsh
 chsh -s $(which zsh)
 ```
 
-Restart your shell, and now the previous command should output the path of your `zsh` executable.
+Restart your shell, and now the previous command should output the path of your `zsh` executable. Then, let's install the core tools of the configuration.
 
-- Install the core tools
+| Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
+| --- | --- | --- | --- |
+| [git](https://git-scm.com/downloads) | Needless to say ;) | `brew install git` | `apt install git` |
+| [fzf](https://junegunn.github.io/fzf/) | Fuzzy search | `brew install fzf` | `apt install fzf` (ensure -v >= 0.48.0) |
+| [fd](https://github.com/sharkdp/fd) | Better `find` | `brew install fd` | `apt install fd-find` |
+| [zoxide](https://github.com/ajeetdsouza/zoxide) | Better `cd` | `brew install zoxide` | `apt install zoxide` |
+| [eza](https://github.com/eza-community/eza) | Better `ls` | `brew install eza` | Follow [instructions](https://github.com/eza-community/eza/blob/main/INSTALL.md) |
+| [bat](https://github.com/sharkdp/bat) | Better `cat` | `brew install bat` | `apt install bat` |
+| [poppler](https://poppler.freedesktop.org/) & [imagemagick](https://imagemagick.org/) | PDF preview rendering | `brew install poppler imagemagick` | `apt install poppler-utils imagemagick `</div> |
 
-| Package             | macOS (Homebrew)                 | Linux (apt / pacman / etc.)                                                        |
-| ------------------- | -------------------------------- | ---------------------------------------------------------------------------------- |
-| `git`               | `brew install git`               | `apt install git`                                                                  |
-| `fzf`               | `brew install fzf`               | `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install` |
-| `nvim`              | `brew install neovim`            | `apt install neovim`                                                               |
-| `bat`               | `brew install bat`               | `apt install bat`                                                                  |
-| `fd`                | `brew install fd`                | `apt install fd-find`                                                              |
-| `eza`               | `brew install eza`               | Follow [instructions](https://github.com/eza-community/eza/blob/main/INSTALL.md)   |
-| `zoxide`            | `brew install zoxide`            | `apt install zoxide`                                                               |
-| `poppler`           | `brew install poppler`           | `apt install poppler-utils`                                                        |
-| `python3`, `pipx`   | `brew install python pipx`       | `sudo apt install python3 pipx`                                                    |
-| `virtualenvwrapper` | `brew install virtualenvwrapper` | `pip install virtualenvwrapper --break-system-packages`                            |
-| `kitty`             | `brew install --cask kitty`      | Download from [kitty website](https://sw.kovidgoyal.net/kitty/)                    |
-| (optional) `tdf`    | Follow [instructions](https://github.com/itsjunetime/tdf?tab=readme-ov-file) | Follow [instructions](https://github.com/itsjunetime/tdf?tab=readme-ov-file) |
-| (optional) `mdcat`  | `brew install mdcat`             | Follow [instructions](https://github.com/swsnr/mdcat)                              |
+Optionally, you can install the following tools to get a better display of `.md` files and be able to go through PDFs directly within your terminal.
 
-- Install the `zsh` plugins
+| Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
+| --- | --- | --- | --- |
+| [mdcat](https://github.com/swsnr/mdcat) | Prettier markdown display | `brew install mdcat`  | Follow [instructions](https://github.com/swsnr/mdcat)  |
+| [tdf](https://github.com/itsjunetime/tdf) | PDF rendering | Follow [instructions](https://github.com/itsjunetime/tdf?tab=readme-ov-file) | same |
+
+Next, let's install some useful `zsh` plugins in their dedicated directory to be easily sourced.
 
 ```sh
-mkdir -p ~/.zsh_plugins
-cd ~/.zsh_plugins
-
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
+mkdir -p ~/.zsh_plugins && cd ~/.zsh_plugins
+git clone https://github.com/romkatv/powerlevel10k.git
 git clone https://github.com/zsh-users/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting
 git clone https://github.com/Aloxaf/fzf-tab
 ```
 
-- Install *Meslo* font
-  - *Linux*
+Finally, include the configuration files of this repository in your `~/.zshrc` file. If you don't have one, create it.
 
-    ```sh
-    mkdir -p ~/.local/share/fonts
-    cd ~/.local/share/fonts
-    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
-    unzip Meslo.zip
-    rm Meslo.zip
-    ```
+```sh
+# .zshrc
+source ~/.dotfiles/zsh/.zshrc
+```
 
-  - *macOS*
+Restart your shell again or run `exec zsh`, and you're good to go with the shell! You're seeing the default layout of [powerlevel10k](https://github.com/romkatv/powerlevel10k), feel free to run `p10k configure` to meet your needs.
 
-    ```sh
-    brew install --cask font-meslo-lg-nerd-font
-    ```
+### Terminal emulator
 
-The following command should output something.
+Let's install the font for this configuration, namely [Meslo](https://github.com/andreberg/Meslo-Font). Here's how to check if it is already downloaded.
 
 ```sh
 fc-cache -fv
 fc-list | grep -i meslo 
 ```
 
-- Back up your current configuration files.
+If nothing appears, follow these instructions.
+
+- **macOS**
+
+    ```sh
+    brew install --cask font-meslo-lg-nerd-font
+    ```
+
+- **Linux**
+
+    ```sh
+    mkdir -p ~/.local/share/fonts && cd ~/.local/share/fonts
+    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
+    unzip Meslo.zip && rm Meslo.zip
+    ```
+
+Next, let's install [kitty](https://sw.kovidgoyal.net/kitty/)!
 
 ```sh
-mv ~/.zshrc ~/.zshrc.bak
-mv ~/.config/kitty ~/.config/kitty.bak
-mv ~/.config/nvim ~/.config/nvim.bak
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ```
 
-- Clone this repo in your `$HOME` directory.
+We are ready to create a symlink to the terminal emulator configuration files of this repository.
 
 ```sh
-git clone https://github.com/jeanprbt/dotfiles.git ~/.dotfiles
+mv ~/.config/kitty ~/.config/kitty.bak # back up your current config
+ln -s ~/.dotfiles/kitty ~/.config/
 ```
 
-- Create symlinks to the relevant files/folders.
+Start kitty, and enjoy your new terminal!
 
-```sh
-ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/kitty ~/.config/kitty
-ln -s ~/.dotfiles/nvim ~/.config/nvim
-```
+### Embedded IDE
 
-- Start `kitty`, and you should be done ! You can run `p10k configure` to customize the shell theme as you wish.
+As you may have noticed, we will rely on [neovim](https://neovim.io/) for this one. Let's install it.
 
-### Configuration details
+| macOS (Homebrew) | Linux (apt/pacman/etc.) |
+| --- | --- |
+| `brew install neovim`  | `apt install neovim` (ensure -v >= 0.10.0) |
 
-#### `zsh`
+Let's also install additional tools it will rely on.
 
-Let's start with the shell ! `zsh` is the default shell on macOS, its single configuration file (`.zshrc`) is located in your `$HOME` directory by default. Sections below follow the order of the file, feel free to open it on the side to have a better understanding of what I'm talking about.
-
-##### Theme
-
-I use [`powerlevel10k`](https://github.com/romkatv/powerlevel10k) as my `zsh` theme. It's easy to configure using the built-in command `p10k configure`, feel free to run it so as to get your own favorite look.
-
-##### History
-
-I configured the `Up` and `Down` arrow keys to go through your command history.
-
-##### Auto suggestions
-
-I use [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions) plugin to get suggestions as I type, which can save a lot of time at some points.
-
-##### Fuzzy-Search
-
-I use [`fzf`](https://github.com/junegunn/fzf) extensively, so as to fuzzy-search through my files & preview them, find my ssh hosts, explore my previous commands etc. When typing a command, I can type `,` and then hit `<Tab>` to launch `fzf` over the according category.
-
-| Command | `fzf` category |
-| -------------- | --------------- |
-| `cd ,` + `<Tab>` | folders |
-| `export/unset ,` + `<Tab>` | env. variables |
-| `ssh ,` + `<Tab>` | ssh hosts |
-| `<anything_else> ,` + `<Tab>` | files & folders |
-
-I configured `<C-r>` shortcut to go through my previous commands, and `C-t` shortcut to preview files in the current directoty. Thanks to `kitty`, previw supports all kind of non-binary files, as well as `pdf`, `markdown` and `jpg/png` files.
-
-##### Completions
-
-`zsh` completions using the `<Tab>` key only include the files/folders in your current directory by default. I added many third-party integrations such as `git` command completion, `gh`, `docker`, `brew`, `jupyter`, `conda` and so on. Many of these are simple files in my `~/.zsh/` folder prepended with `_`, that I source using `fpath` utility. I use [`fzf-tab`](https://github.com/Aloxaf/fzf-tab) plugin to use `fzf` interface when pressing `<Tab>`.
-
-##### Syntax Highlighting
-
-A very useful feature is having syntax highlighting over valid commands. This is made possible thanks to [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting/tree/master) plugin.
-
-##### Super-`cat`
-
-Thanks to `kitty` terminal and its image graphics protocol, I designed a super-`cat` command to display pretty much everything I need to display. Setting an alias for `cat`, I can seamlessly output `pdf`, `markdown`, `jpg/png` files as well as more standard files, that are prettier thanks to [`bat`](https://github.com/sharkdp/bat). You can enable this command adding your `dotfiles` repository to your `$PATH`, or creating a symlink from one directory on your `$PATH` to the `scat` file.
-
-![images](./docs/image.png)
-![pdf](./docs/pdf.png)
-
-##### Better `ls`
-
-I use the awesome [`eza`](https://github.com/eza-community/eza) command as an alternative to `ls`.
-
-##### Mistakes recovery
-
-Way too often I hit `<Enter>` too soon, forgetting one blank space in a 3-lines-long command. Instead of typing it again, I use [`thefuck`](https://github.com/eza-community/eza) corrector which does it for me.
-
-##### Better `cd`
-
-I use the awesome [`zoxide`](https://github.com/ajeetdsouza/zoxide) command as a replacement for `cd`. It allows me to only type partial paths, that are remembered instad of typing the whole absolute path of where I want to go.
-
-##### Theme toggling
-
-I designed a small script to toggle my theme from dark to light and conversely, providing a seamless `toggle-theme` command which does everything under the hood.
-
-That's pretty much everything that is interesting in my `zsh` config !
-
-#### `kitty`
-
-Let's carry on with the terminal emulator ! `kitty` is one of the most advanced out there. What makes it so special is its graphics protocol, which enables viewing images using a full resolution directly within the terminal. Out of the box, it already features pane-splitting and multi-tabs, but I've set some custom shortcuts to really make this emulator mine. Most of the configuration happens in file `kitty.conf`, which can be extended using additional `.py` files.
-
-##### Tab bar
-
-The built-in tab bar was not enough for me, that's why I added a custom bar (thanks to this [comment](https://github.com/kovidgoyal/kitty/discussions/4447#discussioncomment-8736005)) using `tab_bar.py` file. It displays current window in a prettier way, and adds the current kitty [layout](https://sw.kovidgoyal.net/kitty/layouts/), the number of panes and the time on the right.
-
-##### Search
-
-`kitty` does not have a built-in search, that's why I leverage `fzf` once again to go through the history when pressing `<cmd-f>`.
-
-##### Shortcuts
-
-I decided to keep all shortcuts involving the `cmd` key for `kitty`.
-
-| Shortcut | Action |
-| -------------- | --------------- |
-| `<cmd-k>` | clear terminal |
-| `<cmd-c>`/`<cmd-v>` | copy/paste |
-| `<ctrl-/>`| vertical split |
-| `<ctrl-_>`| horizontal split |
-| `<cmd-enter>`| new window |
-| `<cmd-f>` | search history |
-
-#### `nvim`
-
-My neovim config is pretty complex and have lots of features. You can go through my configuration files to pick what seems useful to you
+| Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
+| --- | --- | --- | --- |
+| [node](https://nodejs.org/en) | Copilot runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
+| [luarocks](https://luarocks.org/) | Lua package manager (see below) | `brew install luarocks` | `apt-get install luarocks` |
+| [lua-magick](https://github.com/leafo/magick) | ImageMagick Lua bindings | `luarocks --local --lua-version=5.1 install magick` | same |
+| [awrit](https://github.com/chase/awrit) | Terminal browser (markdown rendering) | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` | same |
