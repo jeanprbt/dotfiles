@@ -66,7 +66,7 @@ Finally, include the configuration files of this repository in your `~/.zshrc` f
 source ~/.dotfiles/zsh/.zshrc
 ```
 
-Restart your shell again or run `exec zsh`, and you're good to go with the shell! You're seeing the default layout of [powerlevel10k](https://github.com/romkatv/powerlevel10k), feel free to run `p10k configure` to meet your needs.
+Restart your shell again or run `exec zsh`, and you're good to go with the shell! You're seeing the default layout of [powerlevel10k](https://github.com/romkatv/powerlevel10k), go ahead to the next section for more customization.
 
 ### Terminal emulator
 
@@ -95,18 +95,20 @@ If nothing appears, follow these instructions.
 
 Next, let's install [kitty](https://sw.kovidgoyal.net/kitty/)!
 
-```sh
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-```
+| macOS (Homebrew) | Linux|
+| --- | --- |
+| `brew install --cask kitty`  | `curl -L https://sw.kovidgoyal.net/kitty/installer.sh \| sh /dev/stdin` |
 
-We are ready to create a symlink to the terminal emulator configuration files of this repository.
+We are ready to create a symlink to the `kitty` configuration files of this repository.
 
 ```sh
 mv ~/.config/kitty ~/.config/kitty.bak # back up your current config
-ln -s ~/.dotfiles/kitty ~/.config/
+ln -s ~/.dotfiles/kitty ~/.config
 ```
 
-Start kitty, and enjoy your new terminal!
+Start kitty, and enjoy your new terminal! Now that both the font and emulator are correctly installed, feel free to run `p10k configure` so as to custom your shell layout.
+
+> Troubleshooting - if you see a message such as `Last login: Wed Jun 11 10:32:11 on ttys003` each time you open `kitty`, simply run `touch ~/.hushlogin` to fix this issue.
 
 ### Embedded IDE
 
@@ -121,6 +123,15 @@ Let's also install additional tools it will rely on.
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
 | [node](https://nodejs.org/en) | Copilot runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
-| [luarocks](https://luarocks.org/) | Lua package manager (see below) | `brew install luarocks` | `apt-get install luarocks` |
-| [lua-magick](https://github.com/leafo/magick) | ImageMagick Lua bindings | `luarocks --local --lua-version=5.1 install magick` | same |
 | [awrit](https://github.com/chase/awrit) | Terminal browser (markdown rendering) | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` | same |
+| [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
+
+Finally, as before, we are ready to create a symlink to `nvim` configuration files of this repository.
+
+```sh
+mv ~/.config/nvim ~/.config/nvim.bak # back up your current config
+ln -s ~/.dotfiles/nvim ~/.config
+```
+
+Launch `nvim`, and plugins should download automatically. Once it's done, you're good to go with a fully-featured embedded IDE!
+

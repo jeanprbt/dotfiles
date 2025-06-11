@@ -15,9 +15,6 @@ bindkey "^[[B" history-search-forward
 # -------- PATH --------
 export PATH="$HOME/.local/bin:$PATH"
 
-# linux-specific, do not commit
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
 # -------- AUTO-SUGGESTIONS --------
 source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -180,23 +177,13 @@ scat() {
 alias ls="eza --color=always --git --icons=always --oneline"
 alias cd="z"
 alias cat="scat"
-alias python="python3"
-alias pip="pip3"
-if [[ "$(uname)" == "Linux" ]]; then
-  if command -v batcat >/dev/null 2>&1; then
-    alias bat="batcat"
-  fi
-  if command -v fdfind >/dev/null 2>&1; then
-    alias fd="fdfind" 
-  fi
-fi
 
 # -------- KITTY THEME TOGGLING --------
 KITTY_FILE="$HOME/.config/kitty/kitty.conf"
 if [[ "$(uname)" == "Linux" ]]; then
 	SED_INPLACE=(-i '')
 elif [[ "$(uname)" == "Darwin" ]]; then
-	SED_INPLACE=(-i)
+	SED_INPLACE=(-i '')
 else
 	echo "Unsupported OS: $(uname)"
 	SED_INPLACE=()
@@ -227,9 +214,4 @@ if [ -f "$KITTY_FILE" ]; then
 		alias nvim='nvim --cmd "set background=light"'
 	fi
     fi
-fi
-
-# ------ NVIM ------
-if [[ "$(uname)" == "Darwin" ]]; then
-    export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 fi

@@ -1,28 +1,17 @@
 return {
 	{
-		"3rd/image.nvim",
-		event = "VeryLazy",
-		opts = {
-			backend = "kitty",
-			integrations = {
-				markdown = {
-					enabled = true,
-					only_render_image_at_cursor = true,
-					filetypes = { "markdown" },
-				},
-			},
-			max_width = 100,
-			max_height = 12,
-			max_height_window_percentage = math.huge,
-			max_width_window_percentage = math.huge,
-			window_overlap_clear_enabled = true,
-			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-			window_background_opacity = 100,
-		},
-	},
-	{
 		"echasnovski/mini.pairs",
 		config = true,
+	},
+	{
+		"folke/snacks.nvim",
+		opts = {
+			image = {
+				-- your image configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			},
+		},
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
