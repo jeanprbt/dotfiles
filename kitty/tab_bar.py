@@ -51,10 +51,7 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
         (surface, screen.cursor.bg, active_tab_layout_name + " "),
         # num windows
         (surface, screen.cursor.bg, " " + window_icon + " "),
-        (surface, screen.cursor.bg, str(active_tab_num_windows) + " "),
-        # time
-        (surface, screen.cursor.bg, " " + time_icon + " "),
-        (surface, screen.cursor.bg, datetime.datetime.now().strftime("%Hh%M") + " "),
+        (surface, screen.cursor.bg, str(active_tab_num_windows) + " ")
     ]
 
     # calculate leading spaces to separate tabs from right status

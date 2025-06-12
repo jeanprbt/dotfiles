@@ -41,11 +41,12 @@ Restart your shell, and now the previous command should output the path of your 
 | [bat](https://github.com/sharkdp/bat) | Better `cat` | `brew install bat` | `apt install batcat` |
 | [poppler](https://poppler.freedesktop.org/) & [imagemagick](https://imagemagick.org/) | PDF preview rendering | `brew install poppler imagemagick` | `apt install poppler-utils imagemagick `</div> |
 
-Optionally, you can install the following tools to get a better display of `.md` files and be able to go through PDFs directly within your terminal.
+Optionally, you can install the following tools to get a better display of `.md` and `.csv` files and be able to go through PDFs directly within your terminal.
 
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
 | [mdcat](https://github.com/swsnr/mdcat) | Prettier markdown display | `brew install mdcat`  | Follow [instructions](https://github.com/swsnr/mdcat)  |
+| [csvlens](https://github.com/YS-L/csvlens) | Prettier csv display | `brew install csvlens` | Follow [instructions](https://github.com/YS-L/csvlens#Installation) |
 | [tdf](https://github.com/itsjunetime/tdf) | PDF rendering | Follow [instructions](https://github.com/itsjunetime/tdf?tab=readme-ov-file) | same |
 
 Next, let's install some useful `zsh` plugins in their dedicated directory to be easily sourced.
@@ -146,7 +147,7 @@ You can now use your terminal with the following features.
 - **Syntax highlighting** : commands are highlighted as you type, so that you easily spot errors.
 - **Fuzzy search**: Press `Ctrl` `T` to search for any file or directory whose path begins with your current location, complete with a content preview. Use `,` + `Tab` to auto-complete the appropriate part of your command (e.g., hostnames for `ssh`, process IDs for `kill`, container names for `docker`, ...).
 - **Better commands**: `ls` uses `eza` for prettier output, `cd` uses `zoxide` for navigation with partial paths.
-- **PDF & image rendering**: use `cat` to seamlessly display images, PDFs, markdown files, etc. nicely formatting them in your teminal, thanks to `bat`, ` mdcat` and `tdf`. This works with `kitty` terminal emulator.
+- **PDF & image rendering**: use `cat` to seamlessly display images, PDFs, csv files, markdown files, etc. nicely formatting them in your teminal, thanks to `bat`, ` mdcat`, `csvlens` and `tdf`. This works with `kitty` terminal emulator.
 
 | Image | PDF |
 | --- | --- |

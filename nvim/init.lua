@@ -11,10 +11,6 @@ vim.opt.number = true
 -- Enable 24-bit color --
 vim.opt.termguicolors = true
 
--- Set python provider --
-vim.g.python3_host_prog = vim.fn.expand("$HOME") .. "/.virtualenvs/neovim/bin/python3"
-vim.g.python_host_prog = vim.fn.expand("$HOME") .. "/.virtualenvs/neovim/bin/python3"
-
 -- Set split navigation keymaps --
 vim.keymap.set({ "n", "t" }, "<C-h>", [[<Cmd>wincmd h<cr>]], { desc = "Move to left window" })
 vim.keymap.set({ "n", "t" }, "<C-j>", [[<Cmd>wincmd j<cr>]], { desc = "Move to below window" })

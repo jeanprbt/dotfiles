@@ -158,6 +158,13 @@ scat() {
                     cat "$file"
                 fi
                 ;;
+            csv)
+                if command -v csvlens >/dev/null 2>&1; then
+                    csvlens "$file" -d auto
+                else
+                    cat "$file"
+                fi
+                ;;
             *)
                 if command -v "$BAT_CMD" >/dev/null 2>&1; then
                     if [ $use_p_flag -eq 1 ]; then
