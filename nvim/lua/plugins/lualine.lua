@@ -8,7 +8,6 @@ return {
 	},
 	opts = function()
 		local pink = "#ea9a97"
-		local blue = "#9ccfd8"
 		return {
 			options = {
 				theme = "rose-pine",
@@ -167,7 +166,6 @@ return {
 				"trouble",
 				"lazy",
 				"mason",
-				"nvim-dap-ui",
 				"toggleterm",
 			},
 		}

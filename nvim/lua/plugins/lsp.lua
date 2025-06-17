@@ -5,7 +5,13 @@ return {
 		dependencies = {
 			{
 				"williamboman/mason.nvim",
-				config = true,
+				opts = {
+					ui = {
+						keymaps = {
+							apply_language_filter = "F",
+						},
+					},
+				},
 			},
 			{
 				"williamboman/mason-lspconfig.nvim",
@@ -13,7 +19,9 @@ return {
 					ensure_installed = {
 						"lua_ls",
 						"pyright",
+						"jsonls",
 					},
+					automatic_enable = false,
 				},
 			},
 			"hrsh7th/cmp-nvim-lsp",
@@ -37,6 +45,9 @@ return {
 						},
 					},
 				},
+			})
+			lspconfig.jsonls.setup({
+				capabilities = capabilities,
 			})
 			vim.keymap.set("n", "H", vim.lsp.buf.hover, { desc = "show _H_over information (lsp)" })
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "_g_o to _d_efinition (lsp)" })

@@ -19,10 +19,17 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort" },
+				json = { "jq" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_format = "fallback",
+			},
+			formatters = {
+				jq = {
+					command = "jq",
+					args = { "--indent", "4" },
+				},
 			},
 		}
 	end,

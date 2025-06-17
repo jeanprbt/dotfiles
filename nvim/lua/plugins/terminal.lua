@@ -38,7 +38,7 @@ return {
 		end
 		vim.keymap.set("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<cr>", { desc = "open _l_azy_g_it (toggleterm)" })
 		vim.keymap.set(
-			{ "n", "t" },
+			"n",
 			"<leader>ht",
 			"<cmd>ToggleTerm size=15 direction=horizontal<cr>",
 			{ desc = "open _h_orizontal _t_erminal (toggleterm)" }
@@ -50,13 +50,13 @@ return {
 			{ desc = "open _p_ython _t_erminal (toggleterm)" }
 		)
 		vim.keymap.set(
-			{ "n", "t" },
+			"n",
 			"<leader>vt",
 			"<cmd>ToggleTerm size=50 direction=vertical<cr>",
 			{ desc = "open _v_ertical _t_erminal (toggleterm)" }
 		)
 		vim.keymap.set(
-			{ "n", "t" },
+			"n",
 			"<leader>wt",
 			"<cmd>ToggleTerm direction=float<cr>",
 			{ desc = "open _w_indow _t_erminal (toggleterm)" }
@@ -70,7 +70,7 @@ return {
 			}):toggle()
 		end
 		vim.api.nvim_set_keymap(
-			"t",
+			"n",
 			"<leader>nt",
 			"<cmd>lua open_next_terminal()<cr>",
 			{ desc = "open _n_ext _t_erminal (toggleterm)" }
