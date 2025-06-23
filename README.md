@@ -123,7 +123,7 @@ Let's also install additional tools it will rely on.
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
 | [node](https://nodejs.org/en) | Copilot runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive seearch | `brew install ripgrep` | `apt-get install ripgrep` |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive search | `brew install ripgrep` | `apt-get install ripgrep` |
 | [awrit](https://github.com/chase/awrit) |  Terminal browser (markdown rendering) | `brew install awrit` | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` |
 | [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
 
@@ -148,7 +148,7 @@ You can now use your terminal with the following features.
 - **Syntax highlighting** : commands are highlighted as you type, so that you easily spot errors.
 - **Fuzzy search**: Press `Ctrl` `T` to search for any file or directory whose path begins with your current location, complete with a content preview. Use `,` + `Tab` to auto-complete the appropriate part of your command (e.g., hostnames for `ssh`, process IDs for `kill`, container names for `docker`, ...).
 - **Better commands**: `ls` uses `eza` for prettier output, `cd` uses `zoxide` for navigation with partial paths.
-- **PDF & image rendering**: use `cat` to seamlessly display images, PDFs, csv files, markdown files, etc. nicely formatting them in your teminal, thanks to `bat`, ` mdcat`, `csvlens` and `tdf`. This works with `kitty` terminal emulator.
+
 
 | Image | PDF |
 | --- | --- |
@@ -164,8 +164,9 @@ And of course, shell is beautified with `powerlevel10k`, which you can customize
 - **Multi-tabs**: open multiple tabs in `kitty`, each with its own shell instance. Use `⌘` `T` (`Ctrl` `⇧` `T`) to open a new tab, and `⌘` `W` (`Ctrl` `⇧` `T`) to close the current one.
 - **Multi-panes**: split your terminal into multiple panes, each with its own shell instance. Use `Ctrl` `/` to split vertically, and `Ctrl` `-` to split horizontally. Switch to different [kitty layouts](https://sw.kovidgoyal.net/kitty/layouts/) using `Ctrl` `N`.
 - **Search terminal canvas**: use `⌘` `F` (`Ctrl` `F`) to fuzzy-search for text in the current terminal pane, again using awesome `fzf` interface, and navigate through results with `Ctrl` `J` and `Ctrl` `K`.  
-
 - **Theme switching**: use `toggle-theme` command to switch between light & dark modes, curated by `Rosé Pine`.
+- **PDF & image rendering**: use `cat` to seamlessly display images, PDFs, csv files, markdown files, etc. nicely formatting them in your teminal, thanks to `bat`, ` mdcat`, `csvlens` and `tdf`.
+- **Command broadcasting**: use `⌘` `B` (`Ctrl` `B`) to broadcast a command to all open panes, allowing you to run the same command in multiple contexts at once.
 
 ### Embedded IDE
 
