@@ -206,13 +206,13 @@ if [ -f "$KITTY_FILE" ]; then
 		if [ "$current_theme" = "rose-pine-moon.conf" ]; then
 			new_theme="rose-pine-dawn.conf"
 			alias nvim='nvim --cmd "set background=light"'
-			sed "$SED_INPLACE" 's/393552/faf4ed/g' "$KITTY_FILE"
+			sed "${SED_INPLACE[@]}" 's/393552/faf4ed/g' "$KITTY_FILE"
 		else 
 			alias nvim='nvim --cmd "set background=dark"'
-			sed "$SED_INPLACE" 's/faf4ed/393552/g' "$KITTY_FILE"
+			sed "${SED_INPLACE[@]}" 's/faf4ed/393552/g' "$KITTY_FILE"
 		fi
 		kitty @ set-colors --all --configured "$HOME/.config/kitty/$new_theme"
-		sed "$SED_INPLACE" -e "s|^include .*|include $new_theme|" "$KITTY_FILE"
+		sed "${SED_INPLACE[@]}" -e "s|^include .*|include $new_theme|" "$KITTY_FILE"
 	    	if [ -n "$KITTY_PID" ]; then
 			kill -SIGUSR1 "$KITTY_PID"
 		fi
