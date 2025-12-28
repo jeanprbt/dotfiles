@@ -83,6 +83,32 @@ _fzf_comprun() {
 	esac
 }
 
+FZF_DARK_THEME="
+	--color=fg:#908caa,bg:#232136,hl:#ea9a97
+	--color=fg+:#e0def4,bg+:#393552,hl+:#ea9a97
+	--color=border:#44415a,header:#3e8fb0,gutter:#232136
+	--color=spinner:#f6c177,info:#9ccfd8
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+FZF_LIGHT_THEME="
+	--color=fg:#797593,bg:#faf4ed,hl:#d7827e
+	--color=fg+:#575279,bg+:#f2e9e1,hl+:#d7827e
+	--color=border:#dfdad9,header:#286983,gutter:#faf4ed
+	--color=spinner:#ea9d34,info:#56949f
+	--color=pointer:#907aa9,marker:#b4637a,prompt:#797593"
+set_fzf_theme() {
+    current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
+    if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+        export FZF_DEFAULT_OPTS="$FZF_DARK_THEME"
+    else
+        export FZF_DEFAULT_OPTS="$FZF_LIGHT_THEME"
+    fi
+}
+if [ -f "$KITTY_FILE" ]; then
+    set_fzf_theme
+fi
+
+
 # ------ BAT (BETTER CAT) ------
 export BAT_THEME="ansi"
 
@@ -215,6 +241,25 @@ if [ -f "$KITTY_FILE" ]; then
 		sed "${SED_INPLACE[@]}" -e "s|^include .*|include $new_theme|" "$KITTY_FILE"
 	    	if [ -n "$KITTY_PID" ]; then
 			kill -SIGUSR1 "$KITTY_PID"
+		fi
+
+        # -------- fzf --------
+        if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+            export FZF_DEFAULT_OPTS="$FZF_LIGHT_THEME"
+        else
+            export FZF_DEFAULT_OPTS="$FZF_DARK_THEME"
+        fi
+		
+		# -------- Mistral Vibe --------
+		if command -v vibe >/dev/null 2>&1; then
+			VIBE_CONFIG="$HOME/.vibe/config.toml"
+			if [ -f "$VIBE_CONFIG" ]; then
+				if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+					sed "${SED_INPLACE[@]}" 's/textual_theme = "rose-pine-moon"/textual_theme = "rose-pine-dawn"/' "$VIBE_CONFIG"
+				else
+					sed "${SED_INPLACE[@]}" 's/textual_theme = "rose-pine-dawn"/textual_theme = "rose-pine-moon"/' "$VIBE_CONFIG"
+				fi
+			fi
 		fi
 	}
 	current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
