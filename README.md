@@ -184,8 +184,6 @@ I set the `<leader>` key to `,` to trigger commands, feel free to change it in `
 | --- | --- |
 | `<leader>` `gb` | Toggle `git blame` functionality |
 | `<leader>` `ct` | Close other tabs |
-| `<leader>` `cc` | Toggle *Copilot Chat* |
-| `<leader>` `cr` | Reset *Copilot Chat* history |
 | `<leader>` `mr` | Toggle pretty in-buffer markdown rendering |
 | `<leader>` `mp` | Toggle markdown preview using `awrit` on a side-tab|
 | `<leader>` `Space` | Toggle file explorer |
@@ -212,7 +210,3 @@ Use `<Ctrl> E` to dismiss autocompletion suggestions, `<Tab>` and `⇧ <Tab>` to
 #### Remote development
 
 This configuration comes with remote development support, allowing you to connect to a remote server via SSH / docker container and work on files directly within `nvim`. Use `RemoteStart` to start a remote session, and `RemoteStop` to stop it. You can also use `RemoteInfo` to get information about active/inactive sessions. 
-
-#### Copilot
-
-This configuration comes with *Copilot* support, both via *Copilot Chat* (see [keybindings](#keybindings)) and inline suggestions, that you can accept with `<Tab>`. Use `:Copilot auth` to authenticate with your account.

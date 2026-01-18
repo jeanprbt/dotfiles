@@ -24,7 +24,7 @@ return {
 			vim.cmd([[do FileType]])
 			vim.cmd([[
                 function OpenMarkdownPreview (url)
-                    let cmd = "kitten @ goto-layout splits & kitten @ launch --location vsplit --keep-focus awrit " . shellescape(a:url)
+                    let cmd = "kitten @ goto-layout splits & kitten @ launch --location vsplit --keep-focus /bin/zsh -lc \"awrit " . shellescape(a:url) . "\""
                     silent call system(cmd)
                 endfunction
             ]])

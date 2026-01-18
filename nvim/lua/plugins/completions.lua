@@ -35,13 +35,6 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
-		local copilot = require("copilot.suggestion")
-		cmp.event:on("menu_opened", function()
-			vim.b.copilot_suggestion_hidden = true
-		end)
-		cmp.event:on("menu_closed", function()
-			vim.b.copilot_suggestion_hidden = false
-		end)
 		return {
 			snippet = {
 				expand = function(args)
@@ -60,8 +53,6 @@ return {
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
-					elseif copilot.is_visible() then
-						copilot.accept()
 					elseif luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
 					else
