@@ -122,9 +122,10 @@ Let's also install additional tools it will rely on.
 
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
-| [node](https://nodejs.org/en) | Copilot runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
+| [node](https://nodejs.org/en) | Markdown preview runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive search | `brew install ripgrep` | `apt-get install ripgrep` |
-| [awrit](https://github.com/chase/awrit) |  Terminal browser (markdown rendering) | `brew install awrit` | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` |
+| [awrit](https://github.com/chase/awrit) |  Terminal browser (markdown rendering) | `brew install chase/tap/awrit` | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` |
+| [lazygit](https://github.com/jesseduffield/lazygit) | In-terminal `git` UI | `brew install lazygit` | `apt install lazygit` |
 | [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
 
 Finally, as before, we are ready to create a symlink to `nvim` configuration files of this repository.
