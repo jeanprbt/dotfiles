@@ -3,7 +3,6 @@ return {
 	event = "ColorScheme",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"AndreM222/copilot-lualine",
 		"linux-cultist/venv-selector.nvim",
 	},
 	opts = function()
@@ -13,7 +12,7 @@ return {
 				theme = "rose-pine",
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "•", right = "•" },
-				disabled_filetypes = { "copilot-chat", "neotest-summary" },
+				disabled_filetypes = { "neotest-summary" },
 			},
 			sections = {
 				lualine_a = {
@@ -54,21 +53,6 @@ return {
 				},
 				lualine_x = {
 					{
-						"copilot",
-						symbols = {
-							status = {
-								hl = {
-									enabled = pink,
-									sleep = pink,
-									disabled = pink,
-									warning = pink,
-									unknown = pink,
-								},
-							},
-						},
-						show_colors = true,
-					},
-					{
 						function()
 							local path = require("venv-selector").venv()
 							local last_slash = path:match(".*()/")
@@ -100,9 +84,7 @@ return {
 							end
 							local client_names = {}
 							for _, client in pairs(clients) do
-								if client.name ~= "copilot" then
-									table.insert(client_names, client.name)
-								end
+								table.insert(client_names, client.name)
 							end
 							return table.concat(client_names, ", ")
 						end,
