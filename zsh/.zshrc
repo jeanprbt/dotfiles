@@ -19,16 +19,8 @@ export PATH="$HOME/.local/bin:$PATH"
 source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -------- COMPLETIONS SETUP --------
-source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
-fpath=(~/.dotfiles/zsh/completions \\$fpath)
-if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
-  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-elif [[ -d "/usr/share/zsh/site-functions" ]]; then
-  fpath=(/usr/share/zsh/site-functions $fpath)
-elif [[ -d "/usr/local/share/zsh/site-functions" ]]; then
-  fpath=(/usr/local/share/zsh/site-functions $fpath)
-fi
 autoload -Uz compinit && compinit
+source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ------ SYNTAX HIGHLIGHTING ------
 source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
