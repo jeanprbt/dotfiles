@@ -253,6 +253,18 @@ if [ -f "$KITTY_FILE" ]; then
 				fi
 			fi
 		fi
+
+		# -------- k9s --------
+		if command -v k9s >/dev/null 2>&1; then
+			K9S_CONFIG="$HOME/Library/Application Support/k9s/config.yaml"
+			if [ -f "$K9S_CONFIG" ]; then
+				if [ "$current_theme" = "rose-pine-moon.conf" ]; then
+					sed "${SED_INPLACE[@]}" 's/\(skin: \)rose-pine-moon/\1rose-pine-dawn/' "$K9S_CONFIG"
+				else
+					sed "${SED_INPLACE[@]}" 's/\(skin: \)rose-pine-dawn/\1rose-pine-moon/' "$K9S_CONFIG"
+				fi
+			fi
+		fi
 	}
 	current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
 	if [ "$current_theme" = "rose-pine-moon.conf" ]; then
