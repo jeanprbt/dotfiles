@@ -26,9 +26,6 @@ source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white,bg=none'
 
-# -------- ENABLE VIM MODE IN-SHELL --------
-bindkey -v
-
 # -------- FZF --------
 eval "$(fzf --zsh)"
 export FZF_COMPLETION_TRIGGER=','
