@@ -1,23 +1,29 @@
 return {
-	"folke/trouble.nvim",
-	opts = {
-		focus = true,
-		warn_no_results = true,
-		auto_close = true,
-	},
-	config = function(_, opts)
-		require("trouble").setup(opts)
-		vim.keymap.set(
-			"n",
-			"<leader>tr",
-			"<cmd>Trouble lsp_references toggle filter.buf=0<cr>",
-			{ desc = "_t_rouble references (trouble)" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>td",
-			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			{ desc = "_t_rouble diagnostics (trouble)" }
-		)
-	end,
+    {
+        "folke/trouble.nvim",
+        keys = {
+            { "<leader>xx", false },
+            { "<leader>xX", false },
+            { "<leader>cs", false },
+            { "<leader>cS", false },
+            { "<leader>xL", false },
+            { "<leader>xQ", false },
+            { "<leader>td", "<cmd>Trouble diagnostics toggle<cr>", desc = "_t_rouble _d_iagnostics" },
+        },
+    },
+    {
+        "folke/todo-comments.nvim",
+        cmd = { "TodoTrouble", "TodoTelescope" },
+        event = "LazyFile",
+        opts = {},
+        keys = {
+            { "]t", false },
+            { "[t", false },
+            { "<leader>xT", false },
+            { "<leader>sT", false },
+            { "<leader>st", false },
+            { "<leader>xt", false },
+            { "<leader>tt", "<cmd>Trouble todo toggle<cr>", desc = "_t_rouble _t_o-do" },
+        },
+    },
 }

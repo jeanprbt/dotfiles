@@ -171,9 +171,9 @@ And of course, shell is beautified with `powerlevel10k`, which you can customize
 
 ### Embedded IDE
 
-My `neovim` configuration relies on [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management, and it has lots of features. 
+My `neovim` configuration relies on [LazyVim](https://www.lazyvim.org) setup, and it has lots of features.
 
-It comes with a consistent theme with `kitty` and `zsh` in both dark & light mode, which adapts as `toggle-theme` is used. It features a nice welcome dashboard, a bufferline to work on multiple files, refined command line/notifications layout and a bottom line with useful information such as current language, progress within the file, enabled LSPs & formatters, Copilot status, current python virtual environement, and more.
+It comes with a consistent theme with `kitty` and `zsh` in both dark & light mode, which adapts as `toggle-theme` is used. It features a nice welcome dashboard, a bufferline to work on multiple files, refined command line/notifications layout and a bottom line with useful information such as current language, progress within the file, enabled LSPs & formatters, current python virtual environement, and more.
 
 ![dashboard](./docs/dashboard.png)
 
@@ -183,31 +183,22 @@ I set the `<leader>` key to `,` to trigger commands, feel free to change it in `
 
 | Keybinding | Action |
 | --- | --- |
-| `<leader>` `gb` | Toggle `git blame` functionality |
-| `<leader>` `ct` | Close other tabs |
+| `<leader>` `bo` | Close other tabs |
 | `<leader>` `mr` | Toggle pretty in-buffer markdown rendering |
 | `<leader>` `mp` | Toggle markdown preview using `awrit` on a side-tab|
 | `<leader>` `Space` | Toggle file explorer |
-| `<leader>` `;` | Get back to file explorer if opened |
-| `<leader>` `ht` | Toggle horizontal terminal pane |
-| `<leader>` `vt` | Toggle vertical terminal pane |
-| `<leader>` `wt` | Toggle overlay terminal pane |
-| `<leader>` `lg` | Toggle [`lazygit`](https://github.com/jesseduffield/lazygit) terminal |
+| `<leader>` `gg` | Toggle [`lazygit`](https://github.com/jesseduffield/lazygit) terminal |
 | `<leader>` `td` | Toggle diagnostics (i.e. warnings, errors, etc.) |
-| `<leader>` `rn` | Rename current variable |
+| `<leader>` `cr` | Rename current variable |
 | `<leader>` `ca` | See available LSP actions |
 | `H` | Open hover documentation for current variable |
 | `<leader`> `sv` | Select python virtual environment |
 | `<leader>` `ff` | Fuzzy search for files |
-| `<leader>` `fg` | Fuzzy search for any content in the working directory |
+| `<leader>` `,` | Fuzzy search for any content in the working directory |
 
 
 #### LSP & autocompletion
 
-This configuration also comes with autocompletion, LSP support (i.e. warning, errors, etc.), syntax highlighting and auto-formatting. It only supports `lua` and `python` by default, but you can easily add support for other languages by installing the appropriate LSP servers and formatters in `/nvim/lua/plugins/lsp.lua` and `/nvim/lua/plugins/conform.lua`.
+This configuration comes with autocompletion, LSP support (i.e. warning, errors, etc.), syntax highlighting and auto-formatting. It only supports `lua`, `json`, `toml`, `yaml` and `python` by default, but you can easily add support for other languages by installing the appropriate LSP servers and formatters in `/nvim/lua/plugins/lsp.lua` and `/nvim/lua/plugins/format.lua`.
 
 Use `<Ctrl> E` to dismiss autocompletion suggestions, `<Tab>` and `⇧ <Tab>` to navigate them and `<Enter>` to accept the current one.
-
-#### Remote development
-
-This configuration comes with remote development support, allowing you to connect to a remote server via SSH / docker container and work on files directly within `nvim`. Use `RemoteStart` to start a remote session, and `RemoteStop` to stop it. You can also use `RemoteInfo` to get information about active/inactive sessions. 
