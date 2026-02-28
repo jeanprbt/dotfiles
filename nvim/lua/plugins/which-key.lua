@@ -1,39 +1,34 @@
 return {
-	"folke/which-key.nvim",
-	opts = {
-		plugins = {
-			marks = false,
-		},
-		win = {
-			border = "rounded",
-		},
-	},
-	config = function(_, opts)
-		local wk = require("which-key")
-		wk.setup(opts)
-		wk.add({
-			{
-				"<leader>?",
-				function()
-					wk.show()
-				end,
-				desc = "Show key bindings (which-key)",
-			},
-			{
-				"<leader>,",
-				"<cmd>Telescope find_files cwd=~/.config/nvim<cr>",
-				desc = "Open config (which-key)",
-			},
-			{
-				"<M-Up>",
-				"<cmd>m -2<CR>==",
-				desc = "Move line up (which-key)",
-			},
-			{
-				"<M-Down>",
-				"<cmd>m +1<CR>==",
-				desc = "Move line down (which-key)",
-			},
-		})
-	end,
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+        opts.spec = {
+            mode = { "n", "x" },
+            { "<leader>c", group = "code" },
+            { "<leader>f", group = "file/find" },
+            { "<leader>g", group = "git" },
+            { "<leader>q", group = "quit/session" },
+            { "<leader>s", group = "search" },
+            { "<leader>e", group = "enable" },
+            { "<leader>t", group = "trouble" },
+            { "[", group = "prev" },
+            { "]", group = "next" },
+            { "g", group = "goto" },
+            { "z", group = "fold" },
+            {
+                "<leader>b",
+                group = "buffer",
+                expand = function()
+                    return require("which-key.extras").expand.buf()
+                end,
+            },
+            {
+                "<leader>w",
+                group = "windows",
+                proxy = "<c-w>",
+                expand = function()
+                    return require("which-key.extras").expand.win()
+                end,
+            },
+        }
+    end,
 }
