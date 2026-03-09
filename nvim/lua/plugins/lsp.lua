@@ -82,6 +82,8 @@ return {
                 "yamlls",
                 "taplo",
                 "ty",
+                "vtsls",
+                "tailwindcss",
             },
         },
     },
