@@ -68,7 +68,9 @@ return {
                                 end
                                 local client_names = {}
                                 for _, client in pairs(clients) do
-                                    table.insert(client_names, client.name)
+                                    if client.name ~= "ruff" then
+                                        table.insert(client_names, client.name)
+                                    end
                                 end
                                 return table.concat(client_names, ", ")
                             end,
@@ -78,10 +80,16 @@ return {
                             function()
                                 local conform = require("conform")
                                 local client_names = {}
+                                local has_ruff = false
                                 for _, formatter in pairs(conform.list_formatters_for_buffer(0)) do
-                                    if formatter then
+                                    if formatter and formatter:match("^ruff") then
+                                        has_ruff = true
+                                    elseif formatter then
                                         table.insert(client_names, formatter)
                                     end
+                                end
+                                if has_ruff then
+                                    table.insert(client_names, "ruff")
                                 end
                                 if #client_names == 0 then
                                     return ""
