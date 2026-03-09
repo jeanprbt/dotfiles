@@ -15,3 +15,6 @@ vim.opt.shortmess = "FOItCTcol"
 
 -- remove auto-copy to clipboard
 vim.opt.clipboard = ""
+
+-- disable concealing
+vim.opt.conceallevel = 0
