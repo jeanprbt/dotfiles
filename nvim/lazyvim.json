@@ -2,7 +2,8 @@
   "extras": [
     "lazyvim.plugins.extras.coding.nvim-cmp",
     "lazyvim.plugins.extras.editor.inc-rename",
-    "lazyvim.plugins.extras.editor.neo-tree"
+    "lazyvim.plugins.extras.editor.neo-tree",
+    "lazyvim.plugins.extras.lang.helm"
   ],
   "install_version": 8,
   "news": {
