@@ -39,7 +39,7 @@ Restart your shell, and now the previous command should output the path of your 
 | [zoxide](https://github.com/ajeetdsouza/zoxide) | Better `cd` | `brew install zoxide` | `apt install zoxide` |
 | [eza](https://github.com/eza-community/eza) | Better `ls` | `brew install eza` | Follow [instructions](https://github.com/eza-community/eza/blob/main/INSTALL.md) |
 | [bat](https://github.com/sharkdp/bat) | Better `cat` | `brew install bat` | `apt install batcat` |
-| [poppler](https://poppler.freedesktop.org/) & [imagemagick](https://imagemagick.org/) | PDF preview rendering | `brew install poppler imagemagick` | `apt install poppler-utils imagemagick `</div> |
+| [poppler](https://poppler.freedesktop.org/) & [imagemagick](https://imagemagick.org/) | PDF & images preview rendering | `brew install poppler imagemagick` | `apt install poppler-utils imagemagick `</div> |
 
 Optionally, you can install the following tools to get a better display of `.md` and `.csv` files and be able to go through PDFs directly within your terminal.
 
