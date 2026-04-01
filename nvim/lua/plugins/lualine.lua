@@ -40,9 +40,9 @@ return {
                     lualine_x = {
                         {
                             function()
-                                local path = require("venv-selector").venv()
+                                local path = os.getenv("VIRTUAL_ENV")
                                 local last_slash = path:match(".*()/")
-                                return "venv : " .. (last_slash and path:sub(last_slash + 1) or path)
+                                return (last_slash and path:sub(last_slash + 1) or path)
                             end,
                             icon = { "", color = { fg = pink } },
                             cond = function()
