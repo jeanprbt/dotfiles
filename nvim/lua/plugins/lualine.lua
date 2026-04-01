@@ -32,7 +32,10 @@ return {
                                 hint = icons.diagnostics.Hint,
                             },
                         },
-                        { "filename" },
+                        {
+                            "filename",
+                            path = 1,
+                        },
                     },
                     lualine_x = {
                         {

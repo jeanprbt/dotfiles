@@ -57,7 +57,9 @@ return {
             },
             {
                 "<leader>ff",
-                LazyVim.pick("files"),
+                function()
+                    Snacks.picker.files({ cwd = vim.fn.getcwd() })
+                end,
                 desc = "_f_ind _f_iles",
             },
             {
