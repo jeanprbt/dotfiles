@@ -97,13 +97,6 @@ if [ -f "$KITTY_FILE" ]; then
     set_fzf_theme
 fi
 
-
-# ------ BAT (BETTER CAT) ------
-export BAT_THEME="ansi"
-
-# ------ ZOXIDE (BETTER CD) ------
-eval "$(zoxide init zsh)"
-
 # ------ SCAT (CUSTOM SUPER CAT) ------
 scat() {
     lowercase() {
@@ -198,11 +191,6 @@ scat() {
     done
 }
 
-# ------ ALIASES ------
-alias ls="eza --color=always --git --icons=always --oneline"
-alias cd="z"
-alias cat="scat"
-
 # -------- KITTY THEME TOGGLING --------
 KITTY_FILE="$HOME/.config/kitty/kitty.conf"
 if [[ "$(uname)" == "Linux" ]]; then
@@ -239,18 +227,6 @@ if [ -f "$KITTY_FILE" ]; then
             export FZF_DEFAULT_OPTS="$FZF_DARK_THEME"
         fi
 		
-		# -------- Mistral Vibe --------
-		if command -v vibe >/dev/null 2>&1; then
-			VIBE_CONFIG="$HOME/.vibe/config.toml"
-			if [ -f "$VIBE_CONFIG" ]; then
-				if [ "$current_theme" = "rose-pine-moon.conf" ]; then
-					sed "${SED_INPLACE[@]}" 's/textual_theme = "rose-pine-moon"/textual_theme = "rose-pine-dawn"/' "$VIBE_CONFIG"
-				else
-					sed "${SED_INPLACE[@]}" 's/textual_theme = "rose-pine-dawn"/textual_theme = "rose-pine-moon"/' "$VIBE_CONFIG"
-				fi
-			fi
-		fi
-
 		# -------- k9s --------
 		if command -v k9s >/dev/null 2>&1; then
 			K9S_CONFIG="$HOME/Library/Application Support/k9s/config.yaml"
@@ -271,3 +247,14 @@ if [ -f "$KITTY_FILE" ]; then
 	fi
     fi
 fi
+
+# ------ ZOXIDE (BETTER CD) ------
+eval "$(zoxide init zsh)"
+
+# ------ BAT (BETTER CAT) ------
+export BAT_THEME="ansi"
+
+# ------ ALIASES ------
+alias ls="eza --color=always --git --icons=always --oneline"
+alias cd="z"
+alias cat="scat"
