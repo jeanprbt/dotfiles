@@ -178,6 +178,25 @@ return {
                     },
                 },
             },
+            setup = {
+                taplo = function()
+                    vim.api.nvim_create_autocmd("LspAttach", {
+                        callback = function(args)
+                            local client = vim.lsp.get_client_by_id(args.data.client_id)
+                            if client and client.name == "taplo" and not client._taplo_patched then
+                                client._taplo_patched = true
+                                local orig = client._on_error
+                                function client:_on_error(code, err)
+                                    if vim.lsp.rpc.client_errors[code] == "NO_RESULT_CALLBACK_FOUND" then
+                                        return
+                                    end
+                                    return orig(self, code, err)
+                                end
+                            end
+                        end,
+                    })
+                end,
+            },
         },
     },
     {

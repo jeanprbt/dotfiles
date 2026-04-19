@@ -202,3 +202,30 @@ I set the `<leader>` key to `,` to trigger commands, feel free to change it in `
 This configuration comes with autocompletion, LSP support (i.e. warning, errors, etc.), syntax highlighting and auto-formatting. It only supports `lua`, `json`, `toml`, `yaml` and `python` by default, but you can easily add support for other languages by installing the appropriate LSP servers and formatters in `/nvim/lua/plugins/lsp.lua` and `/nvim/lua/plugins/format.lua`.
 
 Use `<Ctrl> E` to dismiss autocompletion suggestions, `<Tab>` and `⇧ <Tab>` to navigate them and `<Enter>` to accept the current one.
+
+#### Jupyter Notebooks
+
+This configuration supports editing and running Jupyter notebooks directly in `neovim`, powered by [molten-nvim](https://github.com/benlubas/molten-nvim), [quarto-nvim](https://github.com/quarto-dev/quarto-nvim), [otter.nvim](https://github.com/jmbuhr/otter.nvim), and [jupytext.nvim](https://github.com/GCBallesteros/jupytext.nvim). Notebooks are transparently converted to markdown via `jupytext`, giving you full LSP support (diagnostics, completions, hover, go-to-definition) inside code cells.
+
+To set it up, create a dedicated virtualenv for Neovim and install the required Python dependencies.
+
+```sh
+python3 -m venv ~/.virtualenvs/neovim
+~/.virtualenvs/neovim/bin/pip install jupytext jupyter pynvim cairosvg pnglatex nbformat
+```
+
+Then, install `ipykernel` in each project virtualenv you want to use as a notebook kernel. Entering a new notebook in this project will automatically register a `jupyter` kernel and select it.
+
+```sh
+uv add ipykernel
+```
+
+| Keybinding | Action |
+| --- | --- |
+| `<leader>` `jn` | Enter notebook mode (hydra) |
+| `<leader>` `jr` | Run current cell |
+| `<leader>` `ja` | Run cells above |
+| `<leader>` `jA` | Run all cells |
+| `<leader>` `jl` | Run current line |
+| `<leader>` `jo` | Enter output window |
+| `<leader>` `jh` | Hide output |
