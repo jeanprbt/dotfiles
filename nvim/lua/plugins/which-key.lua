@@ -10,6 +10,8 @@ return {
             { "<leader>s", group = "search" },
             { "<leader>e", group = "enable" },
             { "<leader>t", group = "trouble" },
+            { "<leader>m", group = "markdown" },
+            { "<leader>j", group = "jupyter" },
             { "[", group = "prev" },
             { "]", group = "next" },
             { "g", group = "goto" },
