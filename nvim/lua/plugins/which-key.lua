@@ -11,7 +11,6 @@ return {
             { "<leader>e", group = "enable" },
             { "<leader>t", group = "trouble" },
             { "<leader>m", group = "markdown" },
-            { "<leader>p", group = "pdf" },
             { "<leader>j", group = "jupyter" },
             { "[", group = "prev" },
             { "]", group = "next" },
