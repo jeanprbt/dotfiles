@@ -149,8 +149,10 @@ scat() {
 
         case "$extension" in
             md|markdown)
-                if command -v mdcat >/dev/null 2>&1; then
-                    mdcat "$file"
+                if command -v mdcat >/dev/null 2>&1 && mdcat "$file" 2>/dev/null; then
+                    :
+                elif command -v bat >/dev/null 2>&1; then
+                    bat "$file"
                 else
                     cat "$file"
                 fi
@@ -257,4 +259,3 @@ export BAT_THEME="ansi"
 # ------ ALIASES ------
 alias ls="eza --color=always --git --icons=always --oneline"
 alias cd="z"
-alias cat="scat"
