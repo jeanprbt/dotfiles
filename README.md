@@ -122,9 +122,8 @@ Let's also install additional tools it will rely on.
 
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
-| [node](https://nodejs.org/en) | Markdown preview runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
+| [node](https://nodejs.org/en) | LSP servers runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive search | `brew install ripgrep` | `apt-get install ripgrep` |
-| [awrit](https://github.com/chase/awrit) |  Terminal browser (markdown rendering) | `brew install chase/tap/awrit` | `curl -fsS https://chase.github.io/awrit/get \| DOWNLOAD_TO=~/<download_dir> bash` |
 | [lazygit](https://github.com/jesseduffield/lazygit) | In-terminal `git` UI | `brew install lazygit` | `apt install lazygit` |
 | [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
 
@@ -185,7 +184,6 @@ I set the `<leader>` key to `,` to trigger commands, feel free to change it in `
 | --- | --- |
 | `<leader>` `bo` | Close other tabs |
 | `<leader>` `mr` | Toggle pretty in-buffer markdown rendering |
-| `<leader>` `mp` | Toggle markdown preview using `awrit` on a side-tab|
 | `<leader>` `Space` | Toggle file explorer |
 | `<leader>` `gg` | Toggle [`lazygit`](https://github.com/jesseduffield/lazygit) terminal |
 | `<leader>` `td` | Toggle diagnostics (i.e. warnings, errors, etc.) |

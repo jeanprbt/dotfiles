@@ -15,6 +15,9 @@ bindkey "^[[B" history-search-forward
 # -------- PATH --------
 export PATH="$HOME/.local/bin:$PATH"
 
+# -------- LOCALE --------
+export LANG=en_US.UTF-8
+
 # -------- AUTO-SUGGESTIONS --------
 source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
