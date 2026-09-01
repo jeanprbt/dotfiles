@@ -21,6 +21,3 @@ vim.opt.conceallevel = 0
 
 -- enable line wrapping
 vim.opt.wrap = true
-
--- python virtualenv
-vim.g.python3_host_prog = vim.fn.expand("~/.virtualenvs/neovim/bin/python3")

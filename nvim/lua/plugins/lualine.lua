@@ -2,10 +2,6 @@ local pink = "#ea9a97"
 return {
     {
         "nvim-lualine/lualine.nvim",
-        dependencies = {
-            "nvimtools/hydra.nvim",
-            "benlubas/molten-nvim",
-        },
         opts = function()
             -- PERF: we don't need this lualine require madness 🤷
             local lualine_require = require("lualine_require")
@@ -38,29 +34,9 @@ return {
                                     S = "S-LINE",
                                     t = "TERMINAL",
                                 }
-                                local hydra_active = false
-                                local ok, hydra = pcall(require, "hydra.statusline")
-                                if ok then
-                                    hydra_active = hydra.is_active()
-                                end
-                                if hydra_active then
-                                    return "NOTEBOOK"
-                                else
-                                    return modes[vim.fn.mode()]
-                                end
+                                return modes[vim.fn.mode()]
                             end,
-                            color = function()
-                                local hydra_active = false
-                                local ok, hydra = pcall(require, "hydra.statusline")
-                                if ok then
-                                    hydra_active = hydra.is_active()
-                                end
-                                if hydra_active then
-                                    return { bg = "orange", gui = "bold" }
-                                else
-                                    return { gui = "bold" }
-                                end
-                            end,
+                            color = { gui = "bold" },
                             separator = { right = "" },
                         },
                     },
@@ -74,27 +50,10 @@ return {
                                 info = icons.diagnostics.Info,
                                 hint = icons.diagnostics.Hint,
                             },
-                            cond = function()
-                                return not require("hydra.statusline").is_active()
-                            end,
                         },
                         {
                             "filename",
                             path = 1,
-                            cond = function()
-                                return not require("hydra.statusline").is_active()
-                            end,
-                        },
-                        {
-                            function()
-                                local hydra = require("hydra.statusline")
-                                if hydra.is_active() then
-                                    return hydra.get_hint()
-                                end
-                            end,
-                            cond = function()
-                                return require("hydra.statusline").is_active()
-                            end,
                         },
                     },
                     lualine_x = {
@@ -106,26 +65,10 @@ return {
                             end,
                             icon = { "", color = { fg = pink } },
                             cond = function()
-                                return (os.getenv("VIRTUAL_ENV") ~= nil)
-                                    and vim.bo.filetype == "python"
-                                    and not require("molten.status").initialized() == "Molten"
+                                return (os.getenv("VIRTUAL_ENV") ~= nil) and vim.bo.filetype == "python"
                             end,
                             on_click = function()
                                 vim.cmd("VenvSelect")
-                            end,
-                        },
-                        {
-                            function()
-                                return "kernel : " .. require("molten.status").kernels()
-                            end,
-                            icon = { "", color = { fg = "green" } },
-                            cond = function()
-                                return require("molten.status").initialized() == "Molten"
-                                    and (vim.bo.filetype == "markdown" or vim.bo.filetype == "ipynb")
-                            end,
-                            on_click = function()
-                                vim.cmd("MoltenDeinit")
-                                vim.cmd("MoltenInit")
                             end,
                         },
                         {
@@ -143,12 +86,6 @@ return {
                                 return table.concat(client_names, ", ")
                             end,
                             icon = { "󱉶", color = { fg = pink } },
-                            cond = function()
-                                return not (
-                                    require("molten.status").initialized() == "Molten"
-                                    and vim.bo.filetype == "markdown"
-                                )
-                            end,
                         },
                         {
                             function()
@@ -171,36 +108,19 @@ return {
                                 return table.concat(client_names, ", ")
                             end,
                             icon = { "󰛖", color = { fg = pink } },
-                            cond = function()
-                                return not (
-                                    require("molten.status").initialized() == "Molten"
-                                    and vim.bo.filetype == "markdown"
-                                )
-                            end,
                         },
                     },
                     lualine_y = {
                         {
                             "progress",
                             padding = { left = 1, right = 1 },
-                            color = function()
-                                if require("hydra.statusline").is_active() then
-                                    return { fg = "orange" }
-                                end
-                            end,
                         },
                     },
                     lualine_z = {
                         {
                             "location",
                             padding = { left = 1, right = 1 },
-                            color = function()
-                                if require("hydra.statusline").is_active() then
-                                    return { bg = "orange", gui = "bold" }
-                                else
-                                    return { gui = "bold" }
-                                end
-                            end,
+                            color = { gui = "bold" },
                         },
                     },
                 },
