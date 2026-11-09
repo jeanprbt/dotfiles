@@ -124,7 +124,6 @@ Let's also install additional tools it will rely on.
 | --- | --- | --- | --- |
 | [node](https://nodejs.org/en) | LSP servers runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive search | `brew install ripgrep` | `apt-get install ripgrep` |
-| [lazygit](https://github.com/jesseduffield/lazygit) | In-terminal `git` UI | `brew install lazygit` | `apt install lazygit` |
 | [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
 
 Finally, as before, we are ready to create a symlink to `nvim` configuration files of this repository.
@@ -185,7 +184,6 @@ I set the `<leader>` key to `,` to trigger commands, feel free to change it in `
 | `<leader>` `bo` | Close other tabs |
 | `<leader>` `mr` | Toggle pretty in-buffer markdown rendering |
 | `<leader>` `Space` | Toggle file explorer |
-| `<leader>` `gg` | Toggle [`lazygit`](https://github.com/jesseduffield/lazygit) terminal |
 | `<leader>` `td` | Toggle diagnostics (i.e. warnings, errors, etc.) |
 | `<leader>` `cr` | Rename current variable |
 | `<leader>` `ca` | See available LSP actions |

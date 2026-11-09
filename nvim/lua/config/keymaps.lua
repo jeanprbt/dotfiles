@@ -94,10 +94,8 @@ vim.keymap.set("n", "<leader>gf", function()
 end, { desc = "_g_it _f_ile history" })
 
 if vim.fn.executable("lazygit") == 1 then
+    vim.keymap.del("n", "<leader>gg")
     vim.keymap.del("n", "<leader>gG")
-    vim.keymap.set("n", "<leader>gg", function()
-        Snacks.lazygit({ cwd = LazyVim.root.git() })
-    end, { desc = "lazygit" })
 end
 if vim.lsp.inlay_hint then
     vim.keymap.del("n", "<leader>uh")

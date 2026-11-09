@@ -24,12 +24,14 @@ source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # -------- COMPLETIONS SETUP --------
 autoload -Uz compinit && compinit
 source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # ------ SYNTAX HIGHLIGHTING ------
 source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white,bg=none'
 
 # -------- FZF --------
+KITTY_FILE="$HOME/.config/kitty/kitty.conf"  # read by set_fzf_theme and toggle-theme
 eval "$(fzf --zsh)"
 export FZF_COMPLETION_TRIGGER=','
 if [[ "$(uname)" == "Linux" ]]; then
@@ -70,6 +72,7 @@ _fzf_comprun() {
 	case "$command" in
 		cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
 		export|unset) local var_name; var_name=$(awk -F'=' '{print $1}' <<< "$(echo {} | sed "s/^export //")"); fzf --preview "echo -n '$var_name: '; eval 'echo \${}'" "$@" ;;
+		kill)         fzf "$@" ${=FZF_DEFAULT_OPTS} ;;
 		ssh)          fzf --preview 'dig {}'                   "$@" ;;
 		*)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
 	esac
@@ -197,7 +200,6 @@ scat() {
 }
 
 # -------- KITTY THEME TOGGLING --------
-KITTY_FILE="$HOME/.config/kitty/kitty.conf"
 if [[ "$(uname)" == "Linux" ]]; then
 	SED_INPLACE=(-i '')
 elif [[ "$(uname)" == "Darwin" ]]; then
