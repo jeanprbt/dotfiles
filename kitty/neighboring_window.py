@@ -1,4 +1,6 @@
 # pyright: reportMissingImports=false
+import os
+
 from kittens.tui.handler import result_handler
 
 from kitty.key_encoding import KeyEvent, parse_shortcut
@@ -28,8 +30,10 @@ def encode_key_mapping(window, key_mapping):
 def handle_result(args, result, target_window_id, boss):
     window = boss.window_id_map.get(target_window_id)
 
-    cmd = window.child.foreground_cmdline[0]
-    if cmd == 'tmux':
+    # fzf launched from a shell widget or completion shares the shell's process group, so
+    # check every foreground process rather than only the first one
+    cmds = {os.path.basename(p['cmdline'][0]) for p in window.child.foreground_processes if p.get('cmdline')}
+    if cmds & {'tmux', 'fzf'}:
         keymap = args[2]
         encoded = encode_key_mapping(window, keymap)
         window.write_to_child(encoded)
