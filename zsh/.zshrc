@@ -31,7 +31,7 @@ source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=white,bg=none'
 
 # -------- FZF --------
-KITTY_FILE="$HOME/.config/kitty/kitty.conf"  # read by set_fzf_theme and toggle-theme
+KITTY_FILE="$HOME/.config/kitty/kitty.conf"
 eval "$(fzf --zsh)"
 export FZF_COMPLETION_TRIGGER=','
 if [[ "$(uname)" == "Linux" ]]; then
@@ -233,18 +233,6 @@ if [ -f "$KITTY_FILE" ]; then
         else
             export FZF_DEFAULT_OPTS="$FZF_DARK_THEME"
         fi
-		
-		# -------- k9s --------
-		if command -v k9s >/dev/null 2>&1; then
-			K9S_CONFIG="$HOME/Library/Application Support/k9s/config.yaml"
-			if [ -f "$K9S_CONFIG" ]; then
-				if [ "$current_theme" = "rose-pine-moon.conf" ]; then
-					sed "${SED_INPLACE[@]}" 's/\(skin: \)rose-pine-moon/\1rose-pine-dawn/' "$K9S_CONFIG"
-				else
-					sed "${SED_INPLACE[@]}" 's/\(skin: \)rose-pine-dawn/\1rose-pine-moon/' "$K9S_CONFIG"
-				fi
-			fi
-		fi
 	}
 	current_theme=$(awk '$1=="include" {print $2}' "$KITTY_FILE")
 	if [ "$current_theme" = "rose-pine-moon.conf" ]; then
