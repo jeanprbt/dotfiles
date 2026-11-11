@@ -1,5 +1,13 @@
 return {
     "folke/noice.nvim",
+    keys = {
+        { "<leader>sn", false },
+        { "<leader>sna", false },
+        { "<leader>snd", false },
+        { "<leader>snh", false },
+        { "<leader>snl", false },
+        { "<leader>snt", false },
+    },
     opts = {
         routes = {
             {

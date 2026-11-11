@@ -3,15 +3,12 @@ return {
     opts = function(_, opts)
         opts.spec = {
             mode = { "n", "x" },
-            { "<leader>c", group = "code" },
             { "<leader>f", group = "file/find" },
             { "<leader>g", group = "git" },
             { "<leader>q", group = "quit/session" },
             { "<leader>s", group = "search" },
             { "<leader>e", group = "enable" },
-            { "<leader>t", group = "trouble" },
             { "<leader>m", group = "markdown" },
-            { "<leader>j", group = "jupyter" },
             { "[", group = "prev" },
             { "]", group = "next" },
             { "g", group = "goto" },

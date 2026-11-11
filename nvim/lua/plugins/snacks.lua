@@ -4,6 +4,7 @@ return {
         keys = {
             { "<leader><space>", false },
             { "<leader>:", false },
+            { "<leader>/", false },
             { "<leader>n", false },
             { "<leader>fB", false },
             { "<leader>fF", false },
@@ -113,46 +114,11 @@ return {
                 desc = "_s_earch _i_cons",
             },
             {
-                "<leader>sd",
-                function()
-                    Snacks.picker.diagnostics()
-                end,
-                desc = "_s_earch _d_iagnostics",
-            },
-            {
-                "<leader>sD",
-                function()
-                    Snacks.picker.diagnostics_buffer()
-                end,
-                desc = "_s_earch buffer _D_iagnostics",
-            },
-            {
                 "<leader>sm",
                 function()
                     Snacks.picker.man()
                 end,
                 desc = "_s_earch _m_an pages",
-            },
-            {
-                "<leader>sr",
-                function()
-                    Snacks.picker.lsp_references()
-                end,
-                desc = "_s_earch _r_eferences",
-            },
-            {
-                "<leader>ss",
-                function()
-                    Snacks.picker.lsp_symbols()
-                end,
-                desc = "_s_earch _s_ymbols",
-            },
-            {
-                "<leader>sS",
-                function()
-                    Snacks.picker.lsp_workspace_symbols()
-                end,
-                desc = "_s_earch workspace _S_ymbols",
             },
         },
         opts = function(_, opts)
@@ -179,7 +145,6 @@ return {
                     action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
                 },
                 { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
-                { icon = "󰊳 ", key = "m", desc = "LSP", action = ":Mason" },
                 { icon = " ", key = "q", desc = "Quit", action = ":qa" },
             }
         end,

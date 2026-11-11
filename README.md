@@ -1,6 +1,6 @@
 # My terminal configuration
 
-This repository contains all the needed configuration files for an outstanding terminal featuring multi-tabs, pane-splitting, images display, improved common commands and an amazing IDE-like text editor.
+This repository contains all the needed configuration files for an outstanding terminal featuring multi-tabs, pane-splitting, images display, improved common commands and an amazing code viewer.
 
 It was curated for **macOS** and **Linux**, and it leverages awesome [`Rosé Pine`](https://rosepinetheme.com) theme, offering both light & dark modes, as well as [`MesloLGS`](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) font.
 
@@ -12,7 +12,7 @@ The whole configuration relies on $3$ components.
 
 - A shell => [`zsh`](https://fr.wikipedia.org/wiki/Z_Shell)
 - A terminal emulator => [`kitty`](https://sw.kovidgoyal.net/kitty/)
-- An embedded IDE => [`neovim`](https://neovim.io)
+- A lightweight code viewer => [`neovim`](https://neovim.io)
 
 Let's dive into each of these components step-by-step. The configuration is adapted to both **macOS** & **Linux**, please follow the next instructions according to your OS. To get started, clone this repository in your `$HOME` directory.
 
@@ -110,7 +110,7 @@ Start kitty, and enjoy your new terminal! Now that both the font and emulator ar
 
 > Troubleshooting - if you see a message such as `Last login: Wed Jun 11 10:32:11 on ttys003` each time you open `kitty`, simply run `touch ~/.hushlogin` to fix this issue.
 
-### Embedded IDE
+### Code viewer
 
 As you may have noticed, we will rely on [neovim](https://neovim.io/) for this one. Let's install it.
 
@@ -122,7 +122,6 @@ Let's also install additional tools it will rely on.
 
 | Package | Purpose | macOS (Homebrew) | Linux (apt/pacman/etc.) |
 | --- | --- | --- | --- |
-| [node](https://nodejs.org/en) | LSP servers runtime | `brew install node`  | Follow [instructions](https://nodejs.org/en/download) |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Recursive search | `brew install ripgrep` | `apt-get install ripgrep` |
 | [ghostscript](https://www.ghostscript.com) | PDF rendering | `brew install gs`  | `apt install ghostscript` |
 
@@ -133,7 +132,7 @@ mv ~/.config/nvim ~/.config/nvim.bak # back up your current config
 ln -s ~/.dotfiles/nvim ~/.config
 ```
 
-Launch `nvim`, and plugins should download automatically. Once it's done, you're good to go with a fully-featured embedded IDE!
+Launch `nvim`, and plugins should download automatically. Once it's done, you're good to go with a lightweight code viewer!
 
 ## Usage
 
@@ -167,34 +166,11 @@ And of course, shell is beautified with `powerlevel10k`, which you can customize
 - **PDF & image rendering**: use `cat` to seamlessly display images, PDFs, csv files, markdown files, etc. nicely formatting them in your teminal, thanks to `bat`, ` mdcat`, `csvlens` and `tdf`.
 - **Command broadcasting**: use `⌘` `B` (`Ctrl` `B`) to broadcast a command to all open panes, allowing you to run the same command in multiple contexts at once.
 
-### Embedded IDE
+### Code viewer
 
-My `neovim` configuration relies on [LazyVim](https://www.lazyvim.org) setup, and it has lots of features.
+My `neovim` configuration relies on [LazyVim](https://www.lazyvim.org) setup, stripped down to a simple, lightweight code viewer: treesitter syntax highlighting, file & text search, git browsing and a file explorer. There is intentionally no LSP, diagnostics, linting, autocompletion, formatting or folding plugin.
 
-It comes with a consistent theme with `kitty` and `zsh` in both dark & light mode, which adapts as `toggle-theme` is used. It features a nice welcome dashboard, a bufferline to work on multiple files, refined command line/notifications layout and a bottom line with useful information such as current language, progress within the file, enabled LSPs & formatters, current python virtual environement, and more.
+It comes with a consistent theme with `kitty` and `zsh` in both dark & light mode, which adapts as `toggle-theme` is used. It features a nice welcome dashboard, a bufferline to work on multiple files, refined command line/notifications layout and a bottom line showing the mode, git branch, file name, file type and position within the file.
 
 ![dashboard](./docs/dashboard.png)
 
-#### Keybindings
-
-I set the `<leader>` key to `,` to trigger commands, feel free to change it in `/nvim/init.lua`. Thanks to [`which-key`](https://github.com/folke/which-key.nvim), available keybindings are displayed as you type. Here's a summary.
-
-| Keybinding | Action |
-| --- | --- |
-| `<leader>` `bo` | Close other tabs |
-| `<leader>` `mr` | Toggle pretty in-buffer markdown rendering |
-| `<leader>` `Space` | Toggle file explorer |
-| `<leader>` `td` | Toggle diagnostics (i.e. warnings, errors, etc.) |
-| `<leader>` `cr` | Rename current variable |
-| `<leader>` `ca` | See available LSP actions |
-| `H` | Open hover documentation for current variable |
-| `<leader`> `sv` | Select python virtual environment |
-| `<leader>` `ff` | Fuzzy search for files |
-| `<leader>` `,` | Fuzzy search for any content in the working directory |
-
-
-#### LSP & autocompletion
-
-This configuration comes with autocompletion, LSP support (i.e. warning, errors, etc.), syntax highlighting and auto-formatting. It only supports `lua`, `json`, `toml`, `yaml` and `python` by default, but you can easily add support for other languages by installing the appropriate LSP servers and formatters in `/nvim/lua/plugins/lsp.lua` and `/nvim/lua/plugins/format.lua`.
-
-Use `<Ctrl> E` to dismiss autocompletion suggestions, `<Tab>` and `⇧ <Tab>` to navigate them and `<Enter>` to accept the current one.
